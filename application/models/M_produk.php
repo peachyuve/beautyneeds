@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_produk extends CI_Model
 {
-	public function cariproduk($keyword)
+ public function cariproduk($keyword)
     {
         $this->db->like('idProduk', $keyword);
         $this->db->or_like('nama', $keyword);
@@ -19,16 +19,28 @@ class M_produk extends CI_Model
         $this->db->from('produk');
         return $this->db->count_all_results();
     }
-	public function getProdukPagination($limit, $start, $keyword = null)
+ public function getProdukPagination($limit, $start, $keyword = null)
     {
         if ($keyword){
             $this->cariproduk($keyword);
         }
         $this->db->where('status', 1);
-		$this->db->join('jenisproduk','jenisproduk.idJenisProduk=produk.idJenisProduk','LEFT OUTER');
-		$query = $this->db->get('produk', $limit, $start);
+  $this->db->join('jenisproduk','jenisproduk.idJenisProduk=produk.idJenisProduk','LEFT OUTER');
+  $query = $this->db->get('produk', $limit, $start);
         return $query->result_array();
     }
+
+    public function getProdukPembeliPagination($limit, $start, $keyword = null)
+    {
+        if ($keyword){
+            $this->cariproduk($keyword);
+        }
+        $this->db->where('status', '1');
+        $this->db->join('jenisproduk','jenisproduk.idJenisProduk=produk.idJenisProduk','LEFT OUTER');
+        $query = $this->db->get('produk', $limit, $start);
+        return $query->result_array();
+    }
+
     public function getAllProduk()
     {
         return $this->db->get('produk')->result_array();
@@ -43,11 +55,11 @@ class M_produk extends CI_Model
 
     public function getAllProdukAndJenis()
     {
-		$this->db->select('*');
-		$this->db->from('produk');
-		$this->db->join('jenisproduk','jenisproduk.idJenisProduk=produk.idJenisProduk','LEFT OUTER');
-		$query = $this->db->get();
-		return $query->result_array();
+  $this->db->select('*');
+  $this->db->from('produk');
+  $this->db->join('jenisproduk','jenisproduk.idJenisProduk=produk.idJenisProduk','LEFT OUTER');
+  $query = $this->db->get();
+  return $query->result_array();
     }
 
     public function getProdukById($idProduk)
@@ -59,15 +71,17 @@ class M_produk extends CI_Model
 
     public function getAllJenis()
     {
-		$this->db->select('*');
-		$this->db->from('jenisproduk');
-		$query = $this->db->get();
-		return $query->result_array();
+  $this->db->select('*');
+  $this->db->from('jenisproduk');
+  $query = $this->db->get();
+  return $query->result_array();
     }
     public function addProduk($new_image)
     {
         $data = [
             'idProduk'         => $this->input->post('idProduk'),
+            'idKaryawan'        => 'K001',
+            'idUser'        => 'abcde',
             'idJenisProduk'    => $this->input->post('idJenisProduk'),
             'nama'             => $this->input->post('nama'),
             'warna'            => $this->input->post('warna'),

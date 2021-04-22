@@ -3,7 +3,7 @@
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".collapse">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<a class="navbar-brand" href="<?= base_url(''); ?>"><i class="fas fa-clinic-medical mr-3"></i><?= $appname; ?></a>
+	<a class="navbar-brand" href="<?= base_url(''); ?>"><i class="fas fa-fas fa-store mr-3"></i><?= $appname; ?></a>
 
 	<div class="collapse navbar-collapse">
 		<ul class="navbar-nav mr-auto">
@@ -16,12 +16,12 @@
 				<a class="nav-link" href="<?= base_url(''); ?>">Home <span class="sr-only">(current)</span></a>
 			</li>
 
-			<?php if ($title == 'Daftar Obat') :?>
+			<?php if ($title == 'Daftar Produk') :?>
 				<li class="nav-item active">
 			<?php else : ?>
 				<li class="nav-item">
 			<?php endif; ?>
-				<a class="nav-link">Produk</a>
+				<a class="nav-link" href="<?= base_url('pembeli/produk'); ?>">Produk</a>
 			</li>
 
 			<?php if ($title == 'Kontak Kami') :?>

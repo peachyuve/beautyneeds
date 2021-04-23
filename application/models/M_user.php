@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_user extends CI_Model
 {
-	public function getAllUser()
+    public function getAllUser()
     {
         return $this->db->get('user')->result_array();
     }
@@ -45,7 +45,7 @@ class M_user extends CI_Model
             $this->cariuser($keyword);
         }
         $this->db->where('role', 2);
-		$query = $this->db->get('user', $limit, $start);
+        $query = $this->db->get('user', $limit, $start);
         return $query->result_array();
     }
 

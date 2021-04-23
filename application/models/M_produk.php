@@ -71,10 +71,10 @@ class M_produk extends CI_Model
 
     public function getAllJenis()
     {
-  $this->db->select('*');
-  $this->db->from('jenisproduk');
-  $query = $this->db->get();
-  return $query->result_array();
+      $this->db->select('*');
+      $this->db->from('jenisproduk');
+      $query = $this->db->get();
+      return $query->result_array();
     }
     public function addProduk($new_image)
     {

@@ -1,5 +1,4 @@
 
-
 <div class="container-fluid pt-3 mt-4 mb-5">
     <!-- MULAI KONTEN DISINI -->
 
@@ -33,7 +32,7 @@
             </div>
             <div class="card-footer bg-white">
                 <?php if ($obat['stok'] > 0) :?>
-                    <a href="<?= base_url('customer/addtocart/').$obat['idProduk']; ?>" class="btn btn-info mr-1 w-100"><i class="fas fa-lg fa-cart-plus ml-n1 mr-1"></i> Tambah ke Keranjang</a>
+                    <a href="<?= base_url('user/addtocart/').$obat['idProduk']; ?>" class="btn btn-info mr-1 w-100"><i class="fas fa-lg fa-cart-plus ml-n1 mr-1"></i> Tambah ke Keranjang</a>
                 <?php else : ?>
                     <a href="" class="btn btn-danger mr-1 w-100 disabled">Stok Habis</a>
                 <?php endif; ?>

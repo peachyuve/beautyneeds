@@ -3,7 +3,7 @@
 		<h2>Tambah</h2>
 		<!-- MULAI KONTEN DISINI -->
 
-		<?= form_open_multipart('karyawan/tambahproduk');?>
+		<?= form_open_multipart('admin/tambahproduk');?>
 		
         <div class="col-md-7 mt-3">
 			<div class="form-group row">

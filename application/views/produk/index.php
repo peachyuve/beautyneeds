@@ -1,11 +1,11 @@
 <div class="col pt-3 mb-4">
-	<div class="container mt-5">
-		<h2>Obat</h2>
-		<!-- aMULAI KONTEN DISINI -->
+    <div class="container mt-5">
+        <h2>Produk</h2>
+        <!-- aMULAI KONTEN DISINI -->
 
-		<?= $this->session->flashdata('message'); ?>
+        <?= $this->session->flashdata('message'); ?>
 
-		<div class="mt-4 row">
+        <div class="mt-4 row">
             <div class="col justify-content-start">
                 <a href="<?=base_url(); ?>produk/tambahproduk">
                     <button class="btn btn-success">
@@ -23,27 +23,27 @@
                     </div>
                 </div>
             </form>
-		</div>
+        </div>
 
-		<div class="mt-4 table-responsive-lg">
+        <div class="mt-4 table-responsive-lg">
 
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th scope="col"></th>
-						<th scope="col">Id Produk</th>
-						<th scope="col">Nama </th>
-						<th scope="col">Jenis</th>
-						<th scope="col">Warna</th>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Id Produk</th>
+                        <th scope="col">Nama </th>
+                        <th scope="col">Jenis</th>
+                        <th scope="col">Warna</th>
                         <th scope="col">Harga</th>
                         <th scope="col">Gambar</th>
                         <th scope="col">Deskripsi</th>
                         <th scope="col">Stok</th>
-						<th scope="col">Status</th>
-						<th scope="col" colspan="2">Action</th>
-					</tr>
-				</thead>
-				<tbody>
+                        <th scope="col">Status</th>
+                        <th scope="col" colspan="2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
                     <?php if ( empty($produkpagination) ) :?>
                         <tr>
                             <td colspan="6">
@@ -53,19 +53,19 @@
                             </td>
                         </tr>
                     <?php endif; ?>
-					<?php foreach ($produkpagination as $o ) :?>
-					<tr>
-						<form action="">
-							<td><?= ++$start ?></td>
-							<td><?= $o['idProduk'] ?></td>
-							<td><?= $o['nama']?></td>
-							<td><?= $o['namaJenis']?></td>
+                    <?php foreach ($produkpagination as $o ) :?>
+                    <tr>
+                        <form action="">
+                            <td><?= ++$start ?></td>
+                            <td><?= $o['idProduk'] ?></td>
+                            <td><?= $o['nama']?></td>
+                            <td><?= $o['namaJenis']?></td>
                             <td><?= $o['warna']?></td>
                             <td>Rp<?= $o['harga']?>,-</td>
                             <td><?= $o['gambar']?></td>
                             <td><?= $o['deskripsi']?></td>
                             <td><?= $o['stok']?></td>
-							<td>
+                            <td>
                                 <?php if ($o['status'] == 1) : ?>
                                     Tersedia
                                 <?php else : ?>
@@ -73,7 +73,7 @@
                                 <?php endif; ?>
                             </td>
 
-							<td width="1">
+                            <td width="1">
                                 <span data-toggle="tooltip" data-placement="left" title="Detail">
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#detail<?= $o['idProduk']?>">
@@ -100,17 +100,17 @@
                                     </span>
                                 </td>
                             <?php endif; ?>
-						</form>
-					</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
+                        </form>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
 
-			<?= $this->pagination->create_links(); ?>
+            <?= $this->pagination->create_links(); ?>
 
-		</div>
+        </div>
 
-	</div>
+    </div>
 
 </div>
 <!-- MODAL FORM DETAIL OBAT -->

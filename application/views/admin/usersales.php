@@ -1,11 +1,11 @@
 <div class="col pt-3 mb-4">
-	<div class="container mt-5">
-		<h2>User Sales</h2>
-		<!-- MULAI KONTEN DISINI -->
+    <div class="container mt-5">
+        <h2>User Sales</h2>
+        <!-- MULAI KONTEN DISINI -->
 
-		<?= $this->session->flashdata('message'); ?>
+        <?= $this->session->flashdata('message'); ?>
 
-		<div class="mt-4 row">
+        <div class="mt-4 row">
             <div class="col justify-content-start">
                 <a href="<?= base_url(); ?>karyawan/tambahusersales">
                     <button class="btn btn-success">
@@ -23,21 +23,21 @@
                     </div>
                 </div>
             </form>
-		</div>
+        </div>
 
-		<div class="mt-4 table-responsive-lg">
+        <div class="mt-4 table-responsive-lg">
 
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th scope="col"></th>
-						<th scope="col">Username</th>
-						<th scope="col">Email</th>
-						<th scope="col">Nama</th>
-						<th scope="col" colspan="3">Action</th>
-					</tr>
-				</thead>
-				<tbody>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col" colspan="3">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
                     <?php if ( empty($userpagination) ) :?>
                         <tr>
                             <td colspan="6">
@@ -47,15 +47,15 @@
                             </td>
                         </tr>
                     <?php endif; ?>
-					<?php foreach ($userpagination as $u ) :?>
-					<tr>
-						<form action="">
-							<td><?= ++$start ?></td>
-							<td><?= $u['username'] ?></td>
-							<td><?= $u['email']?></td>
-							<td><?= $u['nama']?></td>
+                    <?php foreach ($userpagination as $u ) :?>
+                    <tr>
+                        <form action="">
+                            <td><?= ++$start ?></td>
+                            <td><?= $u['username'] ?></td>
+                            <td><?= $u['email']?></td>
+                            <td><?= $u['nama']?></td>
 
-							<td width="1">
+                            <td width="1">
                                 <span data-toggle="tooltip" data-placement="left" title="Detail">
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#detail<?= $u['idUser']?>">
@@ -82,33 +82,33 @@
                                     </span>
                                 </td>
                             <?php endif; ?>
-						</form>
-					</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
+                        </form>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
 
-			<?= $this->pagination->create_links(); ?>
+            <?= $this->pagination->create_links(); ?>
 
-		</div>
+        </div>
 
-	</div>
+    </div>
 
 </div>
 
 <!-- MODAL FORM DETAIL USER -->
 <?php $no=1; foreach ($getuser as $u ) :?>
 <div class="modal fade" id="detail<?= $u['idUser']; ?>" tabindex="-1" role="dialog">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<!-- <div class="modal-header">
-				<h4>Detail User</h4>
-			</div> -->
-			<div class="modal-body my-auto">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+                <h4>Detail User</h4>
+            </div> -->
+            <div class="modal-body my-auto">
                 <center>
                 <img class="rounded-circle mx-2 mb-3 mt-2 bg-light" height="100px" width="100px"
                     src="<?= base_url('assets/img/profile/') . $u['foto']; ?>">
-				<h5><?= $u['nama'];?></h5>
+                <h5><?= $u['nama'];?></h5>
                 </center>
                 <hr>
                 <div class="row mx-auto">
@@ -160,11 +160,11 @@
                     </div>
                 </div>
                 
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-			</div>
-		</div>
-	</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
 </div>
 <?php endforeach; ?>

@@ -7,13 +7,13 @@
 
         <div class="mt-4 row">
             <div class="col justify-content-start">
-                <a href="<?= base_url(); ?>karyawan/tambahusersales">
+                <a href="<?= base_url(); ?>admin/tambahusersales">
                     <button class="btn btn-success">
                         <i class="fas fa-fw fa-user-plus mr-2"></i>Tambah User
                     </button>
                 </a>
             </div>
-            <form action="<?= base_url('karyawan/usersales'); ?>" method="post" class="col-4 justify-content-end">
+            <form action="<?= base_url('admin/usersales'); ?>" method="post" class="col-4 justify-content-end">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Cari.." name="keyword" autocomplete="off" autofocus
                     value="<?= set_value('keyword'); ?>">
@@ -65,7 +65,7 @@
                             </td>
                             <td width="1">
                                 <span data-toggle="tooltip" data-placement="left" title="Edit">
-                                    <a href="<?= base_url(); ?>karyawan/editusersales/<?= $u['idUser']?>">
+                                    <a href="<?= base_url(); ?>admin/editusersales/<?= $u['idUser']?>">
                                     <button type="button" class="btn btn-warning ml-1">
                                         <i class="fas fa-fw fa-user-edit"></i>
                                     </button>
@@ -74,7 +74,7 @@
                             <?php if ($u['status'] == 1) : ?>
                                 <td width="1">
                                     <span data-toggle="tooltip" data-placement="left" title="Hapus">
-                                        <a href="<?= base_url(); ?>karyawan/hapususersales/<?= $u['idUser']?>"
+                                        <a href="<?= base_url(); ?>admin/hapususersales/<?= $u['idUser']?>"
                                             onClick="return confirm('Apakah Anda yakin ingin menghapus user ini?')">
                                         <button type="button" class="btn btn-danger ml-1">
                                             <i class="fas fa-fw fa-trash-alt"></i>

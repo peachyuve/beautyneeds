@@ -3,17 +3,9 @@
 		<h2>Tambah User</h2>
 		<!-- MULAI KONTEN DISINI -->
 
-		<?= form_open_multipart('karyawan/tambahusersales');?>
+		<?= form_open_multipart('admin/tambahusersales');?>
 		
         <div class="col-md-7 mt-3">
-        	<div class="form-group row">
-				<label for="idUser" class="col-sm-3 col-form-label">ID</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" id="idUser" name="idUser" placeholder="idUser"
-                    value="<?= set_value('idUser'); ?>">
-					<?= form_error('idUser', '<small class="form-text text-danger">', '</small>'); ?>
-				</div>
-			</div>
 
 			<div class="form-group row">
 				<label for="email" class="col-sm-3 col-form-label">Email</label>
@@ -111,7 +103,7 @@
 			</div>
             
 			<div class="form-group row justify-content-end">
-				<a type="button" href="<?= base_url('karyawan/usersales'); ?>" class="btn btn-secondary form-control mt-2 col-sm-2 mx-1">Batal</a>
+				<a type="button" href="<?= base_url('admin/usersales'); ?>" class="btn btn-secondary form-control mt-2 col-sm-2 mx-1">Batal</a>
 				<button type="submit" class="btn btn-success form-control mt-2 col-sm-2 mx-1">Simpan</button>
 			</div>
 		</div>

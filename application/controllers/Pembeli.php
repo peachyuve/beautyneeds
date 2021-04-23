@@ -41,12 +41,12 @@ class Pembeli extends CI_Controller
             $data['keyword'] = null;
         }
 
-        $data['allobat'] = $this->m_produk->getAllProdukAndJenis();
+        $data['allproduk'] = $this->m_produk->getAllProdukAndJenis();
 
         // PAGINATION
         $config['base_url']     = 'http://localhost/beautyneeds/pembeli/produk';
         $config['total_rows']   = $this->m_produk->totalRowsPagination($data['keyword']);
-        $config['per_page']     = 4;
+        $config['per_page']     = 8;
         $data['start']          = $this->uri->segment(3);
 
         //STYLING PAGINATION
@@ -79,11 +79,11 @@ class Pembeli extends CI_Controller
         
         $this->pagination->initialize($config);
         
-        $data['obatpagination'] = $this->m_produk->getProdukPembeliPagination($config['per_page'], $data['start'], $data['keyword']);
+        $data['produkpagination'] = $this->m_produk->getProdukPembeliPagination($config['per_page'], $data['start'], $data['keyword']);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar_customer', $data);
-        $this->load->view('templates/slider', $data);
+        #$this->load->view('templates/slider', $data);
         $this->load->view('pembeli/produk', $data);
         $this->load->view('templates/footer', $data);
     }

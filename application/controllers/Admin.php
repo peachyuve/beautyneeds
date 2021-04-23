@@ -106,7 +106,7 @@ class Admin extends CI_Controller
 
         $data['getuser'] = $this->m_user->getAllUser();
 
-        $this->form_validation->set_rules('idUser', 'idUser', 'required|trim|min_length[5]');
+
         $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required|trim|min_length[3]');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
             'is_unique' => 'Email ini telah terdaftar!'
@@ -335,7 +335,6 @@ class Admin extends CI_Controller
 
         $data['getuser'] = $this->m_user->getAllUser();
 
-        $this->form_validation->set_rules('idUser', 'idUser', 'required|trim|min_length[5]');
         $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required|trim|min_length[3]');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
             'is_unique' => 'Email ini telah terdaftar!'
@@ -588,7 +587,7 @@ class Admin extends CI_Controller
         $data['getjenis'] = $this->m_produk->getAllJenis();
         $data['allproduk'] = $this->m_produk->getAllProdukAndJenis();
 
-        $this->form_validation->set_rules('idProduk', 'idProduk', 'required|trim|min_length[5]');
+
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim|is_unique[produk.nama]', [
             'is_unique' => 'Produk ini telah terdaftar!'
         ]);

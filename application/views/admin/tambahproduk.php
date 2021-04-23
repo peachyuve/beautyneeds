@@ -6,14 +6,6 @@
 		<?= form_open_multipart('admin/tambahproduk');?>
 		
         <div class="col-md-7 mt-3">
-			<div class="form-group row">
-				<label for="idProduk" class="col-sm-3 col-form-label">idProduk</label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" id="idProduk" name="idProduk" placeholder="idProduk"
-                    value="<?= set_value('idProduk'); ?>">
-					<?= form_error('idProduk', '<small class="form-text text-danger">', '</small>'); ?>
-				</div>
-			</div>
 
 			<div class="form-group row">
 				<label for="nama" class="col-sm-3 col-form-label">Nama</label>

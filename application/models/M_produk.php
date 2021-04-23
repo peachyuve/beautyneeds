@@ -55,11 +55,11 @@ class M_produk extends CI_Model
 
     public function getAllProdukAndJenis()
     {
-  $this->db->select('*');
-  $this->db->from('produk');
-  $this->db->join('jenisproduk','jenisproduk.idJenisProduk=produk.idJenisProduk','LEFT OUTER');
-  $query = $this->db->get();
-  return $query->result_array();
+      $this->db->select('*');
+      $this->db->from('produk');
+      $this->db->join('jenisproduk','jenisproduk.idJenisProduk=produk.idJenisProduk','LEFT OUTER');
+      $query = $this->db->get();
+      return $query->result_array();
     }
 
     public function getProdukById($idProduk)
@@ -71,15 +71,62 @@ class M_produk extends CI_Model
 
     public function getAllJenis()
     {
-      $this->db->select('*');
-      $this->db->from('jenisproduk');
-      $query = $this->db->get();
-      return $query->result_array();
+        $this->db->select('*');
+        $this->db->from('jenisproduk');
+        $query = $this->db->get();
+        return $query->result_array();
     }
+
+    public function findColumn(){
+        $this->db->get('produk')->result_array();
+    }
+
+    public function randomGenerator($len, $isAngka=true, $isUppercase=true, $isLowecase=true)
+    {
+        $rand='';
+        for ($i=0; $i < $len; $i++) { 
+            $random = [];
+            ($isAngka)?array_push($random, rand(48,57)):null;
+            ($isUppercase)?array_push($random, rand(65,90)):null;
+            ($isLowecase)?array_push($random, rand(97,122)):null;
+            if (count($random) == 3) {
+                $rand = $rand.chr($random[rand(0,2)]);
+            }elseif (count($random) == 2) {
+                $rand = $rand.chr($random[rand(0,1)]);
+            }elseif (count($random) == 1) {
+                $rand = $rand.chr($random[rand(0,0)]);
+            }else{
+                return '';
+            }
+        }
+        return $rand;
+    }
+
+    public function random_id(){
+        $idFirstName = 'UP';
+        $idList = $this->findColumn();
+        if ($idList) {
+            $isUnique = false;
+            while(!$isUnique) { 
+                $id = $this->randomGenerator(5);
+                $id = $id;
+                if(!in_array($id, $idList['idUser'])){
+                    $isUnique = true;
+                }
+            }
+            $id = $idFirstName.$id;
+        }else {
+            $id = $this->randomGenerator(5);
+            $id = $idFirstName.$id;
+        }
+        return $id;
+
+    }
+
     public function addProduk($new_image)
     {
         $data = [
-            'idProduk'         => $this->input->post('idProduk'),
+            'idProduk'         => $this->random_id(),
             'idKaryawan'        => 'K001',
             'idUser'        => 'abcde',
             'idJenisProduk'    => $this->input->post('idJenisProduk'),

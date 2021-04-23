@@ -3,7 +3,7 @@
 		<h2>Edit</h2>
 		<!-- MULAI KONTEN DISINI -->
 
-		<?= form_open_multipart('karyawan/editproduk/'.$produk['idProduk']);?>
+		<?= form_open_multipart('admin/editproduk/'.$produk['idProduk']);?>
 		
         <div class="col-md-7 mt-3">
 			<div class="form-group row">
@@ -105,7 +105,7 @@
 			</div>
             <hr>
 			<div class="form-group row justify-content-end">
-				<a type="button" href="<?= base_url('karyawan/produk'); ?>" class="btn btn-secondary form-control mt-2 col-sm-2 mx-1">Batal</a>
+				<a type="button" href="<?= base_url('admin/produk'); ?>" class="btn btn-secondary form-control mt-2 col-sm-2 mx-1">Batal</a>
 				<button type="submit" class="btn btn-success form-control mt-2 col-sm-2 mx-1">Tambah</button>
 			</div>
 		</div>

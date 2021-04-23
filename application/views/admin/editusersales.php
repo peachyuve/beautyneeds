@@ -3,7 +3,7 @@
 		<h2>Edit User</h2>
 		<!-- MULAI KONTEN DISINI -->
 
-		<?= form_open_multipart('karyawan/editusersales/'.$getuser['idUser']);?>
+		<?= form_open_multipart('admin/editusersales/'.$getuser['idUser']);?>
 		
         <div class="col-md-7 mt-3">
 
@@ -104,7 +104,7 @@
             
 
 			<div class="form-group row justify-content-end">
-				<a type="button" href="<?= base_url('karyawan/usersales'); ?>" class="btn btn-secondary form-control mt-2 col-sm-2 mx-1">Batal</a>
+				<a type="button" href="<?= base_url('admin/usersales'); ?>" class="btn btn-secondary form-control mt-2 col-sm-2 mx-1">Batal</a>
 				<button type="submit" class="btn btn-success form-control mt-2 col-sm-2 mx-1">Simpan</button>
 			</div>
 		</div>

@@ -67,7 +67,9 @@ class M_user extends CI_Model
     public function adddatapembeli($new_image)
     {
         $data = [
+            'idUser'        => $this->random_id(),
             'nama'          => htmlspecialchars($this->input->post('nama', true)),
+            'idKaryawan'    => 'K001',
             'email'         => htmlspecialchars($this->input->post('email', true)),
             'username'      => htmlspecialchars($this->input->post('username', true)),
             'password'      => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
@@ -84,7 +86,8 @@ class M_user extends CI_Model
     public function adddatasales($new_image)
     {
         $data = [
-            'idUser'        => $this->input->post('idUser'),
+            'idUser'        => $this->random_id(),
+            'idKaryawan'    => 'K001',
             'nama'          => htmlspecialchars($this->input->post('nama', true)),
             'email'         => htmlspecialchars($this->input->post('email', true)),
             'username'      => htmlspecialchars($this->input->post('username', true)),

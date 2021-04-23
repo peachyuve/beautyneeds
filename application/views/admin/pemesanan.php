@@ -7,13 +7,13 @@
 
         <div class="mt-4 row">
             <div class="col justify-content-start">
-                <a href="<?= base_url(); ?>karyawan/tambahpesanan">
+                <a href="<?= base_url(); ?>admin/tambahpesanan">
                     <button class="btn btn-success">
                         <i class="fas fa-fw fa-plus mr-2"></i>Tambah Pemesanan
                     </button>
                 </a>
             </div>
-            <form action="<?= base_url('karyawan/pemesanan'); ?>" method="post" class="col-4 justify-content-end">
+            <form action="<?= base_url('admin/pemesanan'); ?>" method="post" class="col-4 justify-content-end">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Cari.." name="keyword" autocomplete="off" autofocus
                     value="<?= set_value('keyword'); ?>">
@@ -73,7 +73,7 @@
                                         </button>
                                     </span>
                                     <span data-toggle="tooltip" data-placement="left" title="Hapus">
-                                        <a href="<?= base_url(); ?>karyawan/hapusPemesanan/<?= $p['idPemesanan']?>"
+                                        <a href="<?= base_url(); ?>admin/hapusPemesanan/<?= $p['idPemesanan']?>"
                                                 onClick="return confirm('Apakah Anda yakin ingin menghapus Pemesanan ini?')">
                                         <button type="button" class="btn btn-danger ml-1">
                                                 <i class="fas fa-fw fa-user-times"></i>

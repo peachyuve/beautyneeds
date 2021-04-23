@@ -1,11 +1,11 @@
 <div class="col pt-3 mb-4">
-	<div class="container mt-5">
-		<h2>Pemesanan</h2>
-		<!-- MULAI KONTEN DISINI -->
+    <div class="container mt-5">
+        <h2>Pemesanan</h2>
+        <!-- MULAI KONTEN DISINI -->
 
-		<?= $this->session->flashdata('message'); ?>
+        <?= $this->session->flashdata('message'); ?>
 
-		<div class="mt-4 row">
+        <div class="mt-4 row">
             <div class="col justify-content-start">
                 <a href="<?= base_url(); ?>karyawan/tambahpesanan">
                     <button class="btn btn-success">
@@ -25,21 +25,21 @@
             </form>
         </div>
 
-		<div class="mt-4 table-responsive-lg">
+        <div class="mt-4 table-responsive-lg">
 
-			<table id="datatables" class="table table-hover">
-				<thead>
-					<tr>
-						<th scope="col">No</th>
+            <table id="datatables" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
                         <th scope="col">Tanggal Pemesanan</th>
                         <th scope="col">Customer</th>
-						<th scope="col">Total</th>
+                        <th scope="col">Total</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
 
-					</tr>
-				</thead>
-				<tbody>
+                    </tr>
+                </thead>
+                <tbody>
                     <?php if ( empty($allPemesanan) ) :?>
                         <tr>
                             <td colspan="6">
@@ -85,12 +85,12 @@
                         </form>
                     </tr>
                     <?php endforeach; ?>
-				</tbody>
-			</table>
+                </tbody>
+            </table>
 
-		</div>
+        </div>
 
-	</div>
+    </div>
 
 </div>
 

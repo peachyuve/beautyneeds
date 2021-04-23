@@ -37,11 +37,11 @@ class Pemesanan extends CI_Controller
         //cek keyword di dalam kolom pencarian
         if ( $this->input->post('keyword') ){
         //     //jika ada keyword masuk ke dalam data keyword
-        	$data['keyword'] = $this->input->post('keyword');
+            $data['keyword'] = $this->input->post('keyword');
         //     //masukan data keyword ke dalam session agar dapat diakses di setiap page di pagination
             $this->session->set_userdata('keyword', $data['keyword']);
         } else {
-        	$data['keyword'] = null;
+            $data['keyword'] = null;
         }
         // PAGINATION
         $config['base_url']     = 'http://localhost/beautyneeds/admin/pemesanan';

@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 #isinya buat login karyawan aja
 class User extends CI_Controller
 {
-	public function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->load->model('m_karyawan');
@@ -39,7 +39,7 @@ class User extends CI_Controller
         }
     }
     private function _login(){
-    	#isi hehehehe
+        #isi hehehehe
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $user = $this->m_user->getUserByUsername($this->input->post('username', true));

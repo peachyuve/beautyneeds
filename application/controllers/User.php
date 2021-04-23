@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-#isinya buat login karyawan aja
+#isinya buat login user aja
 class User extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('m_karyawan');
+        $this->load->model('m_user');
         $this->load->model('m_produk');
         $this->load->model('m_user');
         $this->load->model('m_pemesanan');
@@ -38,8 +38,8 @@ class User extends CI_Controller
             $this->_login();
         }
     }
-    private function _login(){
-        #isi hehehehe
+    private function _login()
+    {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $user = $this->m_user->getUserByUsername($this->input->post('username', true));
@@ -53,7 +53,7 @@ class User extends CI_Controller
             // cek password
             if ( password_verify($password, $user['password']) ){
                 $data = [
-                    'username' => $User['username'],
+                    'username' => $user['username'],
                     'role' => $user['role']
                 ];
                 $this->session->set_userdata($data);
@@ -150,9 +150,25 @@ class User extends CI_Controller
         }
     }
 
+    public function profile()
+    {
+        $data['appname'] = 'BeautyNeeds';
+        $data['title'] = 'Profil Saya';
+
+        $username = $this->session->userdata('username');
+        $data['user'] = $this->m_user->getProfile($username);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar_customer', $data);
+        $this->load->view('user/profile', $data);
+        #$this->load->view('templates/footer', $data);
+    }
+
     public function logout()
     {
         session_destroy();
-        redirect(base_url('user'));
+        redirect(base_url(''));
     }
+
+
 }

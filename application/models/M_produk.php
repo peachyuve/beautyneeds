@@ -19,14 +19,14 @@ class M_produk extends CI_Model
         $this->db->from('produk');
         return $this->db->count_all_results();
     }
- public function getProdukPagination($limit, $start, $keyword = null)
+    public function getProdukPagination($limit, $start, $keyword = null)
     {
         if ($keyword){
             $this->cariproduk($keyword);
         }
         $this->db->where('status', 1);
-  $this->db->join('jenisproduk','jenisproduk.idJenisProduk=produk.idJenisProduk','LEFT OUTER');
-  $query = $this->db->get('produk', $limit, $start);
+        $this->db->join('jenisproduk','jenisproduk.idJenisProduk=produk.idJenisProduk','LEFT OUTER');
+        $query = $this->db->get('produk', $limit, $start);
         return $query->result_array();
     }
 

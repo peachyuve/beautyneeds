@@ -6,7 +6,7 @@ class Pemesanan extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('m_admin');
+        $this->load->model('m_karyawan');
         $this->load->model('m_produk');
         $this->load->model('m_user');
         $this->load->model('m_pemesanan');
@@ -21,7 +21,7 @@ class Pemesanan extends CI_Controller
         $data['jml_pemesanan'] = $this->m_pemesanan->getPemesananCount();
 
         $sess_username = $this->session->userdata('username');
-        $data['user'] = $this->m_admin->getAdminByUsername($sess_username);
+        $data['user'] = $this->m_karyawan->getAdminByUsername($sess_username);
 
         $data['getproduk'] = $this->m_produk->getAllProduk();
         
@@ -86,6 +86,57 @@ class Pemesanan extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('admin/pemesanan', $data);
         $this->load->view('templates/sidebar_admin', $data);
+
+    }
+
+    public function pembayaran()
+    {
+
+        $data['appname'] = 'Beautyneeds';
+        $data['title'] = 'Pembayaran';
+        $data['user'] = $this->db->get_where('user',
+        ['username' => $this->session->userdata('username')])->row_array();
+
+        $data['allproduk'] = $this->m_produk->getAllprodukAndJenis();
+
+        if ($this->cart->contents()){
+            if($this->input->post('metode')){
+                if ( $this->m_pemesanan->proses($data['user']['idUser']) ){
+                    $this->cart->destroy();
+                    $this->session->set_flashdata('message', 
+                    '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        Pesanan Anda sedang diproses, silahkan kembali lagi nanti.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>');
+                    redirect('pembeli/riwayatPemesanan');
+                } else{
+                    $this->session->set_flashdata('message', 
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Gagal memproses pemesanan, silahkan ulangi kembali.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>');
+                    redirect('keranjang');
+                }
+            }
+            else {
+                // $this->session->set_flashdata('message', 
+                // '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                //    Silakan Isi Nominal Uang yang akan dibayarkan
+                //     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                //         <span aria-hidden="true">&times;</span>
+                //     </button>
+                // </div>');
+            }
+        } 
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar_customer', $data);
+        $this->load->view('pemesanan/pembayaran', $data);
+        $this->load->view('templates/footer', $data);
 
     }
 

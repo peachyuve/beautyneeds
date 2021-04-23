@@ -21,6 +21,12 @@ class M_user extends CI_Model
         return $this->db->get('user')->row_array();
     }
 
+    public function getProfile($username)
+    {
+        $this->db->where('username', $username);
+        return $this->db->get('user')->row_array();
+    }
+
     public function totalRowsPagination($keyword)
     {
         $this->cariuser($keyword);

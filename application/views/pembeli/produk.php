@@ -3,9 +3,8 @@
 <div class="container-fluid pt-3 mt-4 mb-5">
     <!-- MULAI KONTEN DISINI -->
     <br></br>
-    <div class="col-3">
-        <h1>Daftar Produk</h1>
-    </div>
+    <a  href="<?= base_url('pembeli/produk'); ?>">Daftar Produk</a>
+
 
     <div class="row col-11 mb-4 mx-auto justify-content-start">
         <?= $this->session->flashdata('message'); ?> 
@@ -33,10 +32,14 @@
                 <h5><span class="text-info">Rp<?= number_format($produk['harga'], 0,',','.'); ?>,-</span></h5>
             </div>
             <div class="card-footer bg-white">
-                <?php if ($produk['stok'] > 0) :?>
-                    <a href="<?= base_url('customer/addtocart/').$produk['idProduk']; ?>" class="btn btn-info mr-1 w-100"><i class="fas fa-lg fa-cart-plus ml-n1 mr-1"></i> Tambah ke Keranjang</a>
+                <?php if (is_null($user)) :?>
+                    <a href="<?= base_url('user'); ?>" class="btn btn-info mr-1 w-100"><i class="fas fa-lg fa-cart-plus ml-n1 mr-1"></i>Pesan Sekarang</a>
                 <?php else : ?>
-                    <a href="" class="btn btn-danger mr-1 w-100 disabled">Stok Habis</a>
+                    <?php if ($produk['stok'] > 0) :?>
+                        <a href="<?= base_url('pembeli/addtocart/').$produk['idProduk'] ?>" class="btn btn-info mr-1 w-100"><i class="fas fa-lg fa-cart-plus ml-n1 mr-1"></i> Tambah ke Keranjang</a>
+                    <?php else : ?>
+                        <a href="" class="btn btn-danger mr-1 w-100 disabled">Stok Habis</a>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
         </div>

@@ -62,4 +62,58 @@ class M_pemesanan extends CI_Model
         $this->db->where('idPemesanan', $idPemesanan);
         return $this->db->delete('pemesanan');
     }
+
+    public function getPemesananPaginationByUser($limit, $start, $id_user, $keyword = null)
+    {
+        if ($keyword){
+            $this->caripemesanan($keyword);
+        }
+        $this->db->where('user.idUser',$id_user);
+        $this->db->join('user','user.idUser=pemesanan.idUser','LEFT OUTER');
+        $query = $this->db->get('pemesanan', $limit, $start);
+        return $query->result_array();
+    }
+
+    public function totalRowsPaginationByUser($keyword, $idUser)
+    {
+        if ($keyword){
+            $this->caripemesanan($keyword);
+        }
+        $this->db->where('idUser',$idUser);
+        $this->db->from('pemesanan');
+        return $this->db->count_all_results();
+    }
+
+    public function proses($idUser)
+    {
+        // INSERT DATA KE TABEL PEMESANAN
+        $dataPemesanan = array(
+            'idUser'       => $idUser,
+            'tgl_pemesanan' => date('Y-m-d'),
+            'total'         => $this->cart->total(),
+            'metode_pembayaran' => $this->input->post('metode'),
+            'bayar'         => 0,
+            'status'        => 0
+        );
+
+        $this->db->insert('pemesanan', $dataPemesanan);
+        
+        //INSERT ID UNTUK DIPAKAI DI DETAIL_PEMESANAN
+        $idPemesanan = $this->db->insert_id();
+
+        // INSERT DATA KE TABEL DETAIL_PEMESANAN
+        foreach ($this->cart->contents() as $items)
+        {
+            $dataDetailPemesanan = array(
+                'idPemesanan'  => $idPemesanan,
+                'id_obat'       => $items['id'],
+                'jumlah'        => $items['qty'],
+                'subtotal'      => $items['subtotal']
+            );
+
+            $this->db->insert('detail_pemesanan', $dataDetailPemesanan);
+        }
+
+        return true;
+    }
 }

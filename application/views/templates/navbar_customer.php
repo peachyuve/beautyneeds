@@ -44,16 +44,17 @@
 
 		</ul>
 		<ul class="navbar-nav navbar-right mt-2 mt-lg-0">
-			<li class="nav-item active mr-4">
-				<a class="nav-link align-self-center" href="<?= base_url('pemesanan/keranjang'); ?>">
+			
+
+			<?php if ( $this->session->userdata('username') ) : ?>
+				<li class="nav-item active mr-4">
+				<a class="nav-link align-self-center" href="<?= base_url('keranjang'); ?>">
 					<button type="button" class="btn btn-outline-dark">
 						<i class="fas fa-shopping-cart fa-lg mr-2"></i>
 						<span class="badge badge-danger"><?= $this->cart->total_items();?></span>
 					</button>
 				</a>
-			</li>
-
-			<?php if ( $this->session->userdata('username') ) : ?>
+				</li>
 				<li class="nav-item dropdown active">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
 						<?= $user['nama']; ?></span>
@@ -61,9 +62,9 @@
 							src="<?= base_url('assets/img/profile/') . $user['foto']; ?>">
 					</a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="<?= base_url('customer/profile'); ?>">Profil Saya</a>
+						<a class="dropdown-item" href="<?= base_url('user/profile'); ?>">Profil Saya</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="<?= base_url('auth/logout'); ?>">Logout</a>
+						<a class="dropdown-item" href="<?= base_url('user/logout'); ?>">Logout</a>
 					</div>
 				</li>
 			<?php else : ?>

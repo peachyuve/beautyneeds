@@ -49,4 +49,71 @@ class M_pembayaran extends CI_Model
         $this->db->or_like('total', $keyword);
         $this->db->or_like('status', $keyword);
     }
+
+    public function getAllJenis()
+    {
+        $this->db->select('*');
+        $this->db->from('jenisbayar');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function findColumn(){
+        $this->db->get('pembayaran')->result_array();
+    }
+
+    public function randomGenerator($len, $isAngka=true, $isUppercase=true, $isLowecase=true)
+    {
+        $rand='';
+        for ($i=0; $i < $len; $i++) { 
+            $random = [];
+            ($isAngka)?array_push($random, rand(48,57)):null;
+            ($isUppercase)?array_push($random, rand(65,90)):null;
+            ($isLowecase)?array_push($random, rand(97,122)):null;
+            if (count($random) == 3) {
+                $rand = $rand.chr($random[rand(0,2)]);
+            }elseif (count($random) == 2) {
+                $rand = $rand.chr($random[rand(0,1)]);
+            }elseif (count($random) == 1) {
+                $rand = $rand.chr($random[rand(0,0)]);
+            }else{
+                return '';
+            }
+        }
+        return $rand;
+    }
+
+    public function random_id(){
+        $idFirstName = 'PB';
+        $idList = $this->findColumn();
+        if ($idList) {
+            $isUnique = false;
+            while(!$isUnique) { 
+                $id = $this->randomGenerator(5);
+                $id = $id;
+                if(!in_array($id, $idList['idPembayaran'])){
+                    $isUnique = true;
+                }
+            }
+            $id = $idFirstName.$id;
+        }else {
+            $id = $this->randomGenerator(5);
+            $id = $idFirstName.$id;
+        }
+        return $id;
+    }
+
+    public function addPembayaran(){
+
+        $dataPembayaran = array(
+            'idPembayaran'  => $this->random_id(),
+            'tanggalBayar' => date('Y-m-d'),
+            'idKaryawan'         => 'K001',
+            'idJenisBayar' => $this->input->post('idJenisBayar'),
+            'status'        => 0
+        );
+
+        $this->db->insert('pembayaran', $dataPembayaran);
+        return $dataPembayaran['idPembayaran'];
+    }
 }

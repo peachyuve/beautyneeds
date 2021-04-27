@@ -88,16 +88,21 @@
                 <div class="form-group row">
                     <label class="col-sm col-form-label">Metode Pembayaran</label>
                     <div class="col-sm">
-                        <select class="form-control custom-select" name="metode">
-                            <option value="Bayar di Tempat">Bayar di Tempat</option>
-                            <option value="Cash On Delivery">Cash On Delivery</option>
-                        </select>
+                        <select class="custom-select" name="idJenisBayar">
+							<?php foreach ($getjenis as $r ) :?>
+		                        <?php if( set_value('namajenisb') == $r['idJenisBayar'] ) : ?>
+		                            <option value="<?= $r['idJenisBayar']; ?>" selected><?= $r['namajenisb']; ?></option>
+		                        <?php else : ?>
+		                            <option value="<?= $r['idJenisBayar']; ?>"><?= $r['namajenisb']; ?></option>
+		                        <?php endif; ?>
+							<?php endforeach; ?>
+						</select>
                     </div>
                 </div>
             </div>
             <hr>
             <div class="row justify-content-end">
-                <!-- <a type="button" href="<?= base_url('produk/index'); ?>" class="btn btn-secondary form-control mt-2 col-sm-2 mx-1">Batal</a> -->
+                <a type="button" href="<?= base_url('keranjang'); ?>" class="btn btn-secondary form-control col-2 ">Batal</a>
                 <button type="submit" class="btn btn-success form-control col-2">Selesaikan</button>
             </div>
         </form>

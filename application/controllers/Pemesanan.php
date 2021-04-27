@@ -10,6 +10,7 @@ class Pemesanan extends CI_Controller
         $this->load->model('m_produk');
         $this->load->model('m_user');
         $this->load->model('m_pemesanan');
+        $this->load->model('m_pembayaran');
     }
 
     public function index()
@@ -96,12 +97,13 @@ class Pemesanan extends CI_Controller
         $data['title'] = 'Pembayaran';
         $data['user'] = $this->db->get_where('user',
         ['username' => $this->session->userdata('username')])->row_array();
-
+        $data['getjenis'] = $this->m_pembayaran->getAllJenis();
         $data['allproduk'] = $this->m_produk->getAllprodukAndJenis();
 
         if ($this->cart->contents()){
-            if($this->input->post('metode')){
-                if ( $this->m_pemesanan->proses($data['user']['idUser']) ){
+            if($this->input->post('idJenisBayar')){
+                $idPembayaran = $this->m_pembayaran->addPembayaran();
+                if ( $this->m_pemesanan->proses($data['user']['idUser'],$idPembayaran) ){
                     $this->cart->destroy();
                     $this->session->set_flashdata('message', 
                     '<div class="alert alert-success alert-dismissible fade show" role="alert">

@@ -21,7 +21,7 @@ class Pembeli extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar_customer', $data);
         $this->load->view('templates/slider', $data);
-        $this->load->view('pembeli/index', $data);
+        $this->load->view('welcome', $data);
     }
 
     public function produk()
@@ -108,7 +108,7 @@ class Pembeli extends CI_Controller
 
     public function riwayatPemesanan()
     {
-        $data['appname'] = 'produk Online App';
+        $data['appname'] = 'Beautyneeds';
         $data['title'] = 'Riwayat Pemesanan';
 
         $data['jml_produk'] = $this->m_produk->getProdukCount();
@@ -189,4 +189,7 @@ class Pembeli extends CI_Controller
         $this->load->view('templates/footer', $data);
     }
 
+    public function editprofile(){
+        
+    }
 }

@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-4">
                                 <small>Metode Pembayaran</small>
-                                <p> <?= $p['metode_pembayaran'];?> </p>
+                                <p> <?= $p['namajenisb'];?> </p>
                             </div>
                             <div class="col-3">
                                 <small>Total</small>

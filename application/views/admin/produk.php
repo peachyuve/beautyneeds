@@ -13,7 +13,7 @@
                     </button>
                 </a>
             </div>
-            <form action="<?= base_url('karyawan/produk'); ?>" method="post" class="col-4 justify-content-end">
+            <form action="<?= base_url('admin/produk'); ?>" method="post" class="col-4 justify-content-end">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Cari.." name="keyword" autocomplete="off" autofocus
                     value="<?= set_value('keyword'); ?>">

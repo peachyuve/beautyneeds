@@ -14,7 +14,17 @@ class M_user extends CI_Model
         $this->db->from('user');
         return $this->db->count_all_results();
     }
-
+    public function getSalesCount()
+    {
+        $this->db->where('role', '1');
+        $this->db->from('user');
+        return $this->db->count_all_results();
+    }
+    public function getAllSales()
+    {
+        $this->db->where('role', '1');
+        return $this->db->get('user')->result_array();
+    }
     public function getUserById($idUser)
     {
         $this->db->where('idUser', $idUser);
@@ -36,7 +46,7 @@ class M_user extends CI_Model
 
     public function cariuser($keyword)
     {
-        $this->db->like('nama', $keyword);
+        $this->db->like('nama_user', $keyword);
         $this->db->or_like('email', $keyword);
         $this->db->or_like('username', $keyword);
         $this->db->or_like('jenisKelamin', $keyword);
@@ -74,7 +84,7 @@ class M_user extends CI_Model
     {
         $data = [
             'idUser'        => $this->random_id(),
-            'nama'          => htmlspecialchars($this->input->post('nama', true)),
+            'nama_user'          => htmlspecialchars($this->input->post('nama_user', true)),
             'idKaryawan'    => 'K001',
             'email'         => htmlspecialchars($this->input->post('email', true)),
             'username'      => htmlspecialchars($this->input->post('username', true)),
@@ -94,7 +104,7 @@ class M_user extends CI_Model
         $data = [
             'idUser'        => $this->random_id(),
             'idKaryawan'    => 'K001',
-            'nama'          => htmlspecialchars($this->input->post('nama', true)),
+            'nama_user'          => htmlspecialchars($this->input->post('nama_user', true)),
             'email'         => htmlspecialchars($this->input->post('email', true)),
             'username'      => htmlspecialchars($this->input->post('username', true)),
             'password'      => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
@@ -112,7 +122,7 @@ class M_user extends CI_Model
     public function editdatafromadmin($new_image)
     {
         return $data = [
-            'nama'          => htmlspecialchars($this->input->post('nama', true)),
+            'nama_user'          => htmlspecialchars($this->input->post('nama_user', true)),
             'email'         => htmlspecialchars($this->input->post('email', true)),
             'username'      => htmlspecialchars($this->input->post('username', true)),
             'password'      => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
@@ -178,7 +188,7 @@ class M_user extends CI_Model
         $data = [
             'idUser'        => $this->random_id(),
             'idKaryawan'    => 'K001',
-            'nama'          => htmlspecialchars($this->input->post('nama', true)),
+            'nama_user'          => htmlspecialchars($this->input->post('nama_user', true)),
             'email'         => htmlspecialchars($this->input->post('email', true)),
             'username'      => htmlspecialchars($this->input->post('username', true)),
             'password'      => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
@@ -198,7 +208,7 @@ class M_user extends CI_Model
         $data = [
             'idUser'        => $this->random_id(),
             'idKaryawan'    => 'K001',
-            'nama'          => htmlspecialchars($this->input->post('nama', true)),
+            'nama_user'          => htmlspecialchars($this->input->post('nama_user', true)),
             'email'         => htmlspecialchars($this->input->post('email', true)),
             'username'      => htmlspecialchars($this->input->post('username', true)),
             'password'      => password_hash($this->input->post('password'), PASSWORD_DEFAULT),

@@ -29,11 +29,14 @@
                         <div class="row justify-content-between">
                             <div class="col-2">
                                 <small>Status</small>
-                                <?php if ($p['status'] == 1) {
+                                <?php if ($p['statuspm'] == 1) {
                                     echo '<h5><span class="badge text-white" style="background: #00b894;">Selesai</span></h5>';
+                                }else if ($p['statuspm'] == 2){
+                                    echo '<h5><span class="badge badge-warning">Sudah Bayar</span></h5>';
                                 }else{
                                     echo '<h5><span class="badge badge-danger">Belum Selesai</span></h5>';
-                                }?>
+                                }
+                                ?>
                             </div>
                             <div class="col-4">
                                 <small>Metode Pembayaran</small>
@@ -46,6 +49,23 @@
                             <div class="col">
                                 <a href="#" class="btn btn-info mt-2" id="toggle<?= $p['idPemesanan']; ?>">Lihat Detail</a>
                             </div>
+                            <?php  if ($p['statuspm'] == 0) :?>
+                                <div class="col">
+                                    <a href="<?= base_url(); ?>pembeli/uploadbukti/<?= $p['idPembayaran']?>/<?= $p['idPemesanan']?>">
+                                        <button class="btn btn-success">
+                                            <i class="fas fa-fw fa-plus mr-2"></i>Upload Bukti
+                                        </button>
+                                    </a>
+                                </div>
+                            <?php else : ?>
+                                <div class="col">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#bukti<?= $p['idPembayaran']?>">Bukti Pembayaran
+                                    </button>
+                                </div>
+                            <?php endif; ?>
+                            
+                            
                         </div>
                         <div clas="row">
                             <table class="table table mt-2 mx-auto" id="table<?= $p['idPemesanan']; ?>" >
@@ -94,3 +114,21 @@
 
     <!-- AKHIR KONTEN -->
 </div>
+<?php $no=1; foreach ($pemesananPagination as $o ) :?>
+    <div class="modal fade" id="bukti<?= $p['idPembayaran']; ?>" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body my-auto">
+                    <center>
+                    <img class="mx-2 mb-3 mt-2 bg-white" height="150px"
+                        src="<?= base_url('assets/img/produk/') . $o['bukti']; ?>">
+                    </center>
+                </div>
+            </div>
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+

@@ -780,7 +780,7 @@ class Admin extends CI_Controller
         
         $this->pagination->initialize($config);
 
-        $data['produkpagination'] = $this->m_pemesanan->getPemesananPagination($config['per_page'], $data['start'], $data['keyword']);
+        $data['pemesananpagination'] = $this->m_pemesanan->getPemesananPagination($config['per_page'], $data['start'], $data['keyword']);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_admin', $data);
@@ -797,6 +797,12 @@ class Admin extends CI_Controller
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>');
+        redirect('admin/pemesanan');
+    }
+
+    public function pemesananselesai($id){
+        $data = $this->m_pemesanan->selesai($id);
+        $this->m_pemesanan->ubahstatuspemesanan($id);
         redirect('admin/pemesanan');
     }
 }

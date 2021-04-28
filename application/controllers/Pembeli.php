@@ -181,7 +181,7 @@ class Pembeli extends CI_Controller
         {
             $idPemesanan = $data['pemesananPagination'][$x]['idPemesanan'];
             $data['pemesananPagination'][$x]['itemPemesanan'] = $this->m_pemesanan->getDetailPemesanan($idPemesanan);
-            
+           
         }
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar_customer', $data);
@@ -189,7 +189,53 @@ class Pembeli extends CI_Controller
         $this->load->view('templates/footer', $data);
     }
 
-    public function editprofile(){
+   
+
+    public function uploadbukti($idPembayaran,$idPemesanan){
+        $data['appname'] = 'Beautyneeds';
+        $data['title'] = 'Riwayat Pemesanan';
+
+        $sess_username = $this->session->userdata('username');
+        $data['user'] = $this->m_user->getUserByUsername($sess_username);
+        $data['idPembayaran'] = $idPembayaran;
+        $data['idPemesanan'] = $idPemesanan;
+
+        $this->form_validation->set_rules('gambar', 'Fungsi', 'trim|min_length[5]');
+        if ( $this->form_validation->run() == FALSE ){
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/navbar_customer', $data);
+            $this->load->view('pembeli/uploadbukti', $data);
+        }else{
+            $upload_image = $_FILES['gambar']['name'];
+
+            if ($upload_image){
+                
+                $config['upload_path']          = './assets/img/bukti/';
+                $config['allowed_types']        = 'gif|jpg|png';
+                $config['max_size']             = 2048;
+
+                $this->load->library('upload', $config);
+
+                if ($this->upload->do_upload('gambar')){ //jika berhasil upload
+                    //upload gambar yg baru
+                    $new_image = $this->upload->data('file_name');
+                    $this->m_pembayaran->uploadbukti($idPembayaran,$new_image);
+                    $cek = $this->m_pemesanan->sudahbayar();
+                    $this->m_pemesanan->ubahstatuspemesanan($idPemesanan,$cek);
+                    redirect('pembeli/riwayatPemesanan');
+                }else{
+                    //menampilkan pesan error khusus upload
+                    $this->session->set_flashdata('message', '<small class="text-danger">' . 
+                    $this->upload->display_errors() . '</small>');
+
+                }
+            }else{
+                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            Tidak Ada Gambar</div>');
+                 redirect('pembeli/uploadbukti');
+            }
+        }
+        
         
     }
 }

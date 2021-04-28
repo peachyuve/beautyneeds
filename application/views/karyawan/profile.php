@@ -13,7 +13,7 @@
                     </div>
                     <div class="col">
                         <div class="card-body m-3">
-                            <h5 class="card-title"><?= $user['nama_user']; ?></h5>
+                            <h5 class="card-title"><?= $user['nama']; ?></h5>
                             <?php if ($user['role'] = 1) :?>
                                 <h6 class="card-subtitle mb-2 text-muted">Customer</h6>
                             <?php else : ?>

@@ -7,4 +7,5 @@ class M_karyawan extends CI_Model
     {
         return $this->db->get_where('karyawan', ['username' => $username])->row_array();
     }
+
 }

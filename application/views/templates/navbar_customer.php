@@ -57,7 +57,7 @@
 				</li>
 				<li class="nav-item dropdown active">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-						<?= $user['nama']; ?></span>
+						<?= $user['nama_user']; ?></span>
 						<img class="rounded-circle mx-2 bg-light" height="35px" width="35px"
 							src="<?= base_url('assets/img/profile/') . $user['foto']; ?>">
 					</a>

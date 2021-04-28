@@ -116,4 +116,12 @@ class M_pembayaran extends CI_Model
         $this->db->insert('pembayaran', $dataPembayaran);
         return $dataPembayaran['idPembayaran'];
     }
+
+    public function uploadbukti($idPembayaran,$image){
+
+        $data = ['bukti' => $image];
+        $this->db->set($data);
+        $this->db->where('idPembayaran', $idPembayaran);
+        $this->db->update('pembayaran');
+    }
 }

@@ -10,6 +10,8 @@ class M_pemesanan extends CI_Model
     }
 	public function getPemesananCount()
     {
+        
+        $this->db->where('statuspm', 1);
         return $this->db->count_all('pemesanan');
     }
 
@@ -41,6 +43,7 @@ class M_pemesanan extends CI_Model
     }
 
     public function getPemesananPagination($limit, $start, $keyword = null){
+
         if ($keyword){
             $this->caripemesanan($keyword);
         }
@@ -52,9 +55,11 @@ class M_pemesanan extends CI_Model
 
     public function cariPemesanan($keyword)
     {
+        
+        $this->db->like('idPemesanan', $keyword);
         $this->db->or_like('tgl_pemesanan', $keyword);
         $this->db->or_like('total', $keyword);
-        $this->db->or_like('status', $keyword);
+        $this->db->or_like('statuspm', $keyword);   
     }
 
     public function hapusDetailPemesanan($idPemesanan)
@@ -144,7 +149,7 @@ class M_pemesanan extends CI_Model
             'tgl_pemesanan' => date('Y-m-d'),
             'total'         => $this->cart->total(),
             'idPembayaran' => $idPembayaran,
-            'status'        => 0,
+            'statuspm'        => 0,
             'idKaryawan'    => 'K001'
         );
 
@@ -167,4 +172,20 @@ class M_pemesanan extends CI_Model
 
         return true;
     }
+    public function selesai()
+    {
+        return $data = ['statuspm'       => 1];
+    }
+    public function sudahbayar()
+    {
+        return $data = ['statuspm'       => 2];
+    }
+    public function ubahstatuspemesanan($idPemesanan,$data)
+    {
+        $this->db->set($data);
+        $this->db->where('idPemesanan', $idPemesanan);
+        $this->db->update('pemesanan');
+    }
+     
+
 }

@@ -35,12 +35,12 @@
                         <th scope="col">Customer</th>
                         <th scope="col">Total</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" colspan="2">Action</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if ( empty($allPemesanan) ) :?>
+                    <?php if ( empty($pemesananpagination) ) :?>
                         <tr>
                             <td colspan="6">
                                 <div class="alert alert-danger" role="alert">
@@ -49,7 +49,7 @@
                             </td>
                         </tr>
                     <?php endif; ?>
-                    <?php $no=1; foreach ($allPemesanan as $p ) :?>
+                    <?php $no=1; foreach ($pemesananpagination as $p ) :?>
                     <tr>
                         <form action="">
                             <td><?= $no++; ?></td>
@@ -58,14 +58,18 @@
                             <td>Rp<?= number_format($p['total'], 0,',','.'); ?>,-</td>
                           
                             <td>
-                                <?php if ($p['status'] == 1) {
+                                <?php if ($p['statuspm'] == 1) {
                                     echo '<h5><span class="badge text-white" style="background: #00b894;">Selesai</span></h5>';
+                                }else if ($p['statuspm'] == 2){
+                                    echo '<h5><span class="badge badge-warning">Sudah Dibayar</span></h5>';
                                 }else{
                                     echo '<h5><span class="badge badge-danger">Belum Selesai</span></h5>';
-                                }?>
+                                }
+                                ?>
                             </td>
-                            <td width="100">
-                                <div class="row mx-auto justify-content-between">
+
+
+                            <td width="1">
                                     <span data-toggle="tooltip" data-placement="left" title="Detail">
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
                                                 data-target="#detail<?= $p['idPemesanan']?>">
@@ -76,10 +80,18 @@
                                         <a href="<?= base_url(); ?>admin/hapusPemesanan/<?= $p['idPemesanan']?>"
                                                 onClick="return confirm('Apakah Anda yakin ingin menghapus Pemesanan ini?')">
                                         <button type="button" class="btn btn-danger ml-1">
-                                                <i class="fas fa-fw fa-user-times"></i>
+                                                <i class="fas fa-fw fa-times"></i>
                                         </<button>
                                     </span>
-                                </div>
+                                    <?php if ($p['statuspm'] != 1) : ?>
+                                    <span data-toggle="tooltip" data-placement="left" title="Selesai">
+                                       <a href="<?= base_url(); ?>admin/pemesananselesai/<?= $p['idPemesanan']?>"
+                                                onClick="return confirm('Apakah Anda yakin ingin menyelesaikan pemesanan ini?')">
+                                        <button type="button" class="btn btn-success ml-1">
+                                                <i class="fas fa-fw fa-check"></i>
+                                        </<button>
+                                    </span>
+                                    <?php endif; ?>
                             </td>
 
                         </form>

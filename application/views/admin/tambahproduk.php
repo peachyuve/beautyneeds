@@ -50,7 +50,7 @@
 
 			<div class="form-group row">
 				<label for="gambar" class="col-sm-3 col-form-label">Gambar</label>
-				<div class="col-sm-9">
+				<div class="col-sm-7">
 					<div class="custom-file">
 						<input type="file" class="custom-file-input" id="gambar" name="gambar">
 						<label class="custom-file-label" for="foto">Pilih Gambar</label>

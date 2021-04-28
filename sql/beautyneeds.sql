@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2021 at 06:54 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.2.12
+-- Generation Time: Apr 29, 2021 at 12:16 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -40,7 +39,10 @@ CREATE TABLE `detail_pemesanan` (
 --
 
 INSERT INTO `detail_pemesanan` (`idPemesanan`, `idProduk`, `jumlah`, `subtotal`) VALUES
-('PE002', 'P0001', 2, 80000);
+('PE002', 'P0001', 2, 80000),
+('PM2Vu', 'P0001', 1, 40000),
+('PMTk7', 'P0004', 1, 65000),
+('PMTk7', 'P0003', 1, 65000);
 
 -- --------------------------------------------------------
 
@@ -113,8 +115,16 @@ CREATE TABLE `laba` (
   `idLaba` varchar(5) NOT NULL,
   `idProduk` varchar(5) NOT NULL,
   `idKaryawan` varchar(5) NOT NULL,
+  `tgl_laba` date NOT NULL,
   `jumlahLaba` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `laba`
+--
+
+INSERT INTO `laba` (`idLaba`, `idProduk`, `idKaryawan`, `tgl_laba`, `jumlahLaba`) VALUES
+('L0001', 'P0001', 'K001', '2021-04-02', 0);
 
 -- --------------------------------------------------------
 
@@ -128,7 +138,6 @@ CREATE TABLE `pembayaran` (
   `idJenisBayar` varchar(5) NOT NULL,
   `idKaryawan` varchar(5) NOT NULL,
   `tanggalTenggat` date NOT NULL,
-  `status` int(11) NOT NULL,
   `bukti` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -136,9 +145,11 @@ CREATE TABLE `pembayaran` (
 -- Dumping data for table `pembayaran`
 --
 
-INSERT INTO `pembayaran` (`idPembayaran`, `tanggalBayar`, `idJenisBayar`, `idKaryawan`, `tanggalTenggat`, `status`, `bukti`) VALUES
-('PB001', '2021-03-30', 'JB002', 'K001', '2021-03-31', 0, ''),
-('PB002', '2021-03-22', 'JB001', 'K001', '2021-03-23', 0, '');
+INSERT INTO `pembayaran` (`idPembayaran`, `tanggalBayar`, `idJenisBayar`, `idKaryawan`, `tanggalTenggat`, `bukti`) VALUES
+('PB001', '2021-03-30', 'JB002', 'K001', '2021-03-31', ''),
+('PB002', '2021-03-22', 'JB001', 'K001', '2021-03-23', ''),
+('PBLVN', '2021-04-26', 'JB002', 'K001', '0000-00-00', 'S__14811178.jpg'),
+('PBnP3', '2021-04-26', 'JB001', 'K001', '0000-00-00', 'KTM_13011842712.jpg');
 
 -- --------------------------------------------------------
 
@@ -153,15 +164,17 @@ CREATE TABLE `pemesanan` (
   `idUser` varchar(5) NOT NULL,
   `idKaryawan` varchar(5) NOT NULL,
   `idPembayaran` varchar(5) NOT NULL,
-  `status` int(11) NOT NULL
+  `statuspm` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pemesanan`
 --
 
-INSERT INTO `pemesanan` (`idPemesanan`, `tgl_pemesanan`, `total`, `idUser`, `idKaryawan`, `idPembayaran`, `status`) VALUES
-('PE002', '2021-03-21', 80000, 'abcde', 'K001', 'PB002', 0);
+INSERT INTO `pemesanan` (`idPemesanan`, `tgl_pemesanan`, `total`, `idUser`, `idKaryawan`, `idPembayaran`, `statuspm`) VALUES
+('PE002', '2021-03-21', 80000, 'abcde', 'K001', 'PB002', 0),
+('PM2Vu', '2021-04-26', 40000, 'USZDB', 'K001', 'PBnP3', 2),
+('PMTk7', '2021-04-26', 130000, 'USZDB', 'K001', 'PBLVN', 2);
 
 -- --------------------------------------------------------
 
@@ -174,15 +187,16 @@ CREATE TABLE `pendapatansales` (
   `idUser` varchar(5) NOT NULL,
   `idProduk` varchar(5) NOT NULL,
   `idKaryawan` varchar(5) NOT NULL,
-  `jumlahPendapatan` int(11) NOT NULL
+  `jumlahPendapatan` int(11) NOT NULL,
+  `statuspes` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pendapatansales`
 --
 
-INSERT INTO `pendapatansales` (`idPendapatanS`, `idUser`, `idProduk`, `idKaryawan`, `jumlahPendapatan`) VALUES
-('PS001', 'aaaaa', 'P0001', 'K001', 0);
+INSERT INTO `pendapatansales` (`idPendapatanS`, `idUser`, `idProduk`, `idKaryawan`, `jumlahPendapatan`, `statuspes`) VALUES
+('PS001', 'aaaaa', 'P0001', 'K001', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -218,7 +232,9 @@ INSERT INTO `produk` (`idProduk`, `nama`, `warna`, `harga`, `gambar`, `deskripsi
 ('P0007', 'Emina Cheeklit Cream Blush', 'pinkk', 25200, 'emina_cheeklit1.jpg', 'Cheek Lit Cream Blush adalah blush on dengan tekstur krim yang sangat mudah untuk diaplikasikan pada wajah !   Diformulasikan untuk memberikan rona alami dan tahan lama pada wajah cantikmu. Dengan teknologi color enhance, menghasilkan warna yang lembut.', 1, 75, 'JP02', 'K001', 'abcde'),
 ('P0008', 'Nuface Facial Mask Prominent Essence Bird Nest', 'orang', 31200, 'nuface_mask1.jpg', 'Masker wajah dengan cairan yang mengandung bahan baku terkemuka dari hewan eksotis yang telah terbuki manfaatnya bagi kecantikan kulit. Diformulasi dengan Bird Nest Extrac yang berfungsi untuk melembabkan dan mencegah penuaan dini pada kulit wajah. Juga m', 1, 20, 'JP01', 'K001', 'abcde'),
 ('P0009', 'SK-II Facial Treatment Cleansing Oil 250ml', 'putih', 701500, 'sk2_cleansingoil1.jpg', 'Facial Treatment Cleansing Oil 250ml', 1, 10, 'JP01', 'K001', 'abcde'),
-('P0010', 'Whitelab Brightening Night Cream', 'putih', 95000, 'whitelab_acne1.jpg', 'niacinamide + collagen', 1, 5, 'JP01', 'K001', 'abcde');
+('P0010', 'Whitelab Brightening Night Cream', 'putih', 95000, 'whitelab_acne1.jpg', 'niacinamide + collagen', 1, 5, 'JP01', 'K001', 'abcde'),
+('UPPH8', 'test', 'qqqqq', 50000, 'default.png', 'asdasdsa', 0, 50, 'JP01', 'K001', 'abcde'),
+('UPZAm', 'adasd', 'asdas', 132132132, 'default.png', 'adsad', 1, 50, 'JP01', 'K001', 'abcde');
 
 -- --------------------------------------------------------
 
@@ -229,7 +245,7 @@ INSERT INTO `produk` (`idProduk`, `nama`, `warna`, `harga`, `gambar`, `deskripsi
 CREATE TABLE `user` (
   `idUser` varchar(5) NOT NULL,
   `idKaryawan` varchar(5) NOT NULL,
-  `nama` varchar(255) NOT NULL,
+  `nama_user` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -247,9 +263,12 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`idUser`, `idKaryawan`, `nama`, `email`, `username`, `password`, `noHp`, `alamat`, `jenisKelamin`, `foto`, `tgl_lahir`, `role`, `uniqueCode`, `status`) VALUES
+INSERT INTO `user` (`idUser`, `idKaryawan`, `nama_user`, `email`, `username`, `password`, `noHp`, `alamat`, `jenisKelamin`, `foto`, `tgl_lahir`, `role`, `uniqueCode`, `status`) VALUES
 ('aaaaa', 'K001', 'Gisela Yunanda (Emina)', 'giselayunanda@gmail.com', 'giselayunanda', '$2y$10$SuAjVvNWfUX6SYfQNkBHCeqdgul.vJb/CTLkClTsqSAkUYqlmkeRq', '082117841949', 'Purwodadi', 'Perempuan', '', '2021-03-02', 1, 'eminamantap', 1),
-('abcde', 'K001', 'Sarah Rahmawati', 'ersarahr@gmail.com', 'ersarahr', '$2y$10$SuAjVvNWfUX6SYfQNkBHCeqdgul.vJb/CTLkClTsqSAkUYqlmkeRq', '082117841949', 'Jalan Helikopter no 10 RT 02 RW 23', 'Perempuan', '', '2021-03-01', 2, '', 1);
+('abcde', 'K001', 'Sarah Rahmawati', 'ersarahr@gmail.com', 'ersarahr', '$2y$10$SuAjVvNWfUX6SYfQNkBHCeqdgul.vJb/CTLkClTsqSAkUYqlmkeRq', '082117841949', 'Jalan Helikopter no 10 RT 02 RW 23', 'Perempuan', '', '2021-03-01', 1, 'wardahpunya', 1),
+('asdsa', 'K001', 'siapaya', 'siapaya@gmail.com', 'siapaya', '$2y$10$SuAjVvNWfUX6SYfQNkBHCeqdgul.vJb/CTLkClTsqSAkUYqlmkeRq', '089898989898', 'dimana aku', 'Perempuan', '', '2021-04-01', 1, 'akucantikbet', 1),
+('US0g1', 'K001', 'siapaaaa', 'siapaya@gmail.com', 'siapapun', '$2y$10$nNYjtqQrNfFri7PwokMTxOPruqQiPluIoptJEyxna9tnbT8eFml62', '0898989892222', 'asdasd', 'Wanita', 'default.jpg', '2021-04-12', 1, '', 1),
+('USZDB', 'K001', 'hehehehe', 'hallo@gmail.com', 'halobandung', '$2y$10$8KjBQ5n3FHE2XsYXro62y.Vg78Cy1HHqFUTVJ02otS1QKaiSpdOki', '0811111111', 'asdasd', 'Wanita', 'default.jpg', '2021-04-21', 2, '', 1);
 
 --
 -- Indexes for dumped tables
@@ -285,8 +304,8 @@ ALTER TABLE `karyawan`
 --
 ALTER TABLE `laba`
   ADD PRIMARY KEY (`idLaba`),
-  ADD KEY `idKaryawan` (`idKaryawan`),
-  ADD KEY `idProduk` (`idProduk`);
+  ADD KEY `idProduk` (`idProduk`),
+  ADD KEY `idKaryawan` (`idKaryawan`);
 
 --
 -- Indexes for table `pembayaran`
@@ -345,8 +364,8 @@ ALTER TABLE `detail_pemesanan`
 -- Constraints for table `laba`
 --
 ALTER TABLE `laba`
-  ADD CONSTRAINT `laba_ibfk_1` FOREIGN KEY (`idKaryawan`) REFERENCES `karyawan` (`idKaryawan`),
-  ADD CONSTRAINT `laba_ibfk_2` FOREIGN KEY (`idProduk`) REFERENCES `produk` (`idProduk`);
+  ADD CONSTRAINT `laba_ibfk_1` FOREIGN KEY (`idProduk`) REFERENCES `produk` (`idProduk`),
+  ADD CONSTRAINT `laba_ibfk_2` FOREIGN KEY (`idKaryawan`) REFERENCES `karyawan` (`idKaryawan`);
 
 --
 -- Constraints for table `pembayaran`

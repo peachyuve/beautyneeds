@@ -21,7 +21,7 @@
 				<h6>Nama</h6>
 			</div>
 			<div class="col">
-				<?= $user['nama'] ?>
+				<?= $user['nama_user'] ?>
 			</div>
 		</div>
 		<div class="row mb-2">

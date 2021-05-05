@@ -54,7 +54,7 @@
                         <form action="">
                             <td><?= $no++; ?></td>
                             <td><?= $p['tgl_pemesanan']?></td>
-                            <td><?= $p['nama'] ?></td>
+                            <td><?= $p['nama_user'] ?></td>
                             <td>Rp<?= number_format($p['total'], 0,',','.'); ?>,-</td>
                           
                             <td>

@@ -3,10 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_laba extends CI_Model
 {
+    // mereturn semua data laba dalam array
     public function getAllLaba()
     {
         return $this->db->get('laba')->result_array();
     }
+
 
     public function getAllProdukSales()
     {
@@ -18,12 +20,14 @@ class M_laba extends CI_Model
     }
 
 
-
+    #mencari baris pada database dengan kata kunci nama sales, dan nama user
     public function carilaba($keyword)
     {
         $this->db->like('nama', $keyword);
         $this->db->or_like('nama_user', $keyword);    
    	}
+    // mengambil semua baris data dari laba yang di join dengan produk dan user. apabila ada keyword, 
+    // hanya mengambil baris data dengan kata kunci keyword. 
     public function getLabaPagination($limit, $start, $keyword = null)
     {
         if ($keyword){
@@ -34,18 +38,22 @@ class M_laba extends CI_Model
         $query = $this->db->get('laba', $limit, $start);
         return $query->result_array();
     }
+
+    #menghapus data laba dengan kata kunci idlaba yang diinpu tuser
     public function hapuslaba($idlaba)
     {
         $this->db->where('idLaba', $idlaba);
         return $this->db->delete('laba');
     }
 
+    // untuk random generator id 
+
+    //mereturn semua kolom dari laba
     public function findColumn(){
         $this->db->get('laba')->result_array();
     }
 
- 
-
+    //merandom angka dan huruf
     public function randomGenerator($len, $isAngka=true, $isUppercase=true, $isLowecase=true)
     {
         $rand='';
@@ -66,7 +74,7 @@ class M_laba extends CI_Model
         }
         return $rand;
     }
-
+    //fungsi utama random id pada data yang baru diinput
     public function random_id(){
         $idFirstName = 'L';
         $idList = $this->findColumn();
@@ -88,6 +96,7 @@ class M_laba extends CI_Model
 
     }
 
+    //menambahkan baris data ke laba
     public function addLaba()
     {
         $data = [

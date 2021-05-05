@@ -8,12 +8,7 @@
 		<div class="collapse navbar-collapse">
 			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 				<li class="nav-item dropdown active">
-					<a class="nav-link dropdown-toggle" href="" id="" role="button" data-toggle="dropdown"
-						style="background: #2f3542;">
-						<?= $user['nama']; ?></span>
-						<img class="rounded-circle mx-2 bg-light" style="object-fit: cover;" height="35px" width="35px"
-							src="<?= base_url('assets/img/profile/') . $user['foto']; ?>">
-					</a>
+
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="">
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="<?= base_url('karyawan/logout'); ?>">Logout</a>

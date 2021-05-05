@@ -19,7 +19,7 @@ class Karyawan extends CI_Controller
     {
         if (!$this->session->userdata('username')) {
             redirect(base_url('karyawan/login'));
-        } 
+        }
             #$this->load->view('templates/footer', $data);
         
     }

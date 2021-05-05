@@ -81,7 +81,7 @@
                             </td>
                             <td width="1">
                                 <span data-toggle="tooltip" data-placement="left" title="Edit">
-                                    <a href="<?= base_url(); ?>karyawan/editproduk/<?= $o['idProduk']?>">
+                                    <a href="<?= base_url(); ?>admin/editproduk/<?= $o['idProduk']?>">
                                     <button type="button" class="btn btn-warning ml-1">    
                                         <i class="fas fa-fw fa-edit"></i>
                                     </button>
@@ -90,7 +90,7 @@
                             <?php if ($o['status'] == 1) : ?>
                                 <td width="1">
                                     <span data-toggle="tooltip" data-placement="left" title="Hapus">
-                                        <a href="<?= base_url(); ?>karyawan/hapusProduk/<?= $o['idProduk']?>"
+                                        <a href="<?= base_url(); ?>admin/hapusProduk/<?= $o['idProduk']?>"
                                             onClick="return confirm('Apakah Anda yakin ingin menghapus obat ini?')">
                                         <button type="button" class="btn btn-danger ml-1">
                                             <i class="fas fa-fw fa-trash-alt"></i>

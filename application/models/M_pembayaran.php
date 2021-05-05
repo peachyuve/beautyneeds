@@ -110,7 +110,6 @@ class M_pembayaran extends CI_Model
             'tanggalBayar' => date('Y-m-d'),
             'idKaryawan'         => 'K001',
             'idJenisBayar' => $this->input->post('idJenisBayar'),
-            'status'        => 0
         );
 
         $this->db->insert('pembayaran', $dataPembayaran);

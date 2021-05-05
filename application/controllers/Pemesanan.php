@@ -15,79 +15,7 @@ class Pemesanan extends CI_Controller
 
     public function index()
     {
-        $data['appname'] = 'Beautyneeds';
-        $data['title'] = 'Pemesanan Produk';
-
-        $data['jml_produk'] = $this->m_produk->getProdukCount();
-        $data['jml_pemesanan'] = $this->m_pemesanan->getPemesananCount();
-
-        $sess_username = $this->session->userdata('username');
-        $data['user'] = $this->m_karyawan->getAdminByUsername($sess_username);
-
-        $data['getproduk'] = $this->m_produk->getAllProduk();
-        
-        $data['allPemesanan'] = $this->m_pemesanan->getAllPemesanan();
-
-        $rows = count($data['allPemesanan']);
-        for ($x = 0; $x < $rows; $x++)
-        {
-            $idPemesanan = $data['allPemesanan'][$x]['idPemesanan'];
-            $data['allPemesanan'][$x]['itemPemesanan'] = $this->m_pemesanan->getDetailPemesanan($idPemesanan);
-            
-        }
-        //cek keyword di dalam kolom pencarian
-        if ( $this->input->post('keyword') ){
-        //     //jika ada keyword masuk ke dalam data keyword
-            $data['keyword'] = $this->input->post('keyword');
-        //     //masukan data keyword ke dalam session agar dapat diakses di setiap page di pagination
-            $this->session->set_userdata('keyword', $data['keyword']);
-        } else {
-            $data['keyword'] = null;
-        }
-        // PAGINATION
-        $config['base_url']     = 'http://localhost/beautyneeds/admin/pemesanan';
-        $config['total_rows']   = $this->m_pemesanan->totalRowsPagination($data['keyword']);
-        $config['per_page']     = 5;
-        $data['start']          = $this->uri->segment(3);
-
-        //STYLING PAGINATION
-        $config['full_tag_open']    = '<nav><ul class="pagination pagination-sm justify-content-center">';
-        $config['full_tag_close']   = '</ul></nav>';
-        
-        $config['first_link']       = 'First';
-        $config['first_tag_open']   = '<li class="page-item">';
-        $config['first_tag_close']  = '</li>';
-        
-        $config['last_link']        = 'Last';
-        $config['last_tag_open']    = '<li class="page-item">';
-        $config['last_tag_close']   = '</li>';
-        
-        $config['next_link']        = '&raquo';
-        $config['next_tag_open']    = '<li class="page-item">';
-        $config['next_tag_close']   = '</li>';
-        
-        $config['prev_link']        = '&laquo';
-        $config['prev_tag_open']    = '<li class="page-item">';
-        $config['prev_tag_close']   = '</li>';
-        
-        $config['cur_tag_open']     = '<li class="page-item"><a class="page-link bg-secondary text-light" href="#">';
-        $config['cur_tag_close']    = '</a></li>';
-        
-        $config['num_tag_open']     = '<li class="page-item">';
-        $config['num_tag_close']    = '</li>';
-
-        $config['attributes']       = array('class' => 'page-link text-dark');
-        
-        
-        $this->pagination->initialize($config);
-        
-        $data['pemesananPagination'] = $this->m_pemesanan->getPemesananPagination($config['per_page'], $data['start'], $data['keyword']);
-       
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('admin/pemesanan', $data);
-        $this->load->view('templates/sidebar_admin', $data);
-
+      
     }
 
     public function pembayaran()
@@ -95,15 +23,24 @@ class Pemesanan extends CI_Controller
 
         $data['appname'] = 'Beautyneeds';
         $data['title'] = 'Pembayaran';
-        $data['user'] = $this->db->get_where('user',
-        ['username' => $this->session->userdata('username')])->row_array();
+        //mengambil session dari data user login
+        $sess_username = $this->session->userdata('username');
+        //mencari baris data di database tabel user sesuai session username
+        $data['user'] = $this->m_user->getUserByUsername($sess_username);
+        //mengambil semua baris data di database tabel jenis produk 
         $data['getjenis'] = $this->m_pembayaran->getAllJenis();
+        //mengambil semua baris data di database tabel jenis produk dan produk
         $data['allproduk'] = $this->m_produk->getAllprodukAndJenis();
 
+        //cek ada data di keranjang
         if ($this->cart->contents()){
+            //cek id jenis bayar
             if($this->input->post('idJenisBayar')){
+                //add data pembayaran ke database
                 $idPembayaran = $this->m_pembayaran->addPembayaran();
+                //add data pemesanan dan detail pemesanan
                 if ( $this->m_pemesanan->proses($data['user']['idUser'],$idPembayaran) ){
+                    //menghapus isi cart 
                     $this->cart->destroy();
                     $this->session->set_flashdata('message', 
                     '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -124,17 +61,8 @@ class Pemesanan extends CI_Controller
                     redirect('keranjang');
                 }
             }
-            else {
-                // $this->session->set_flashdata('message', 
-                // '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                //    Silakan Isi Nominal Uang yang akan dibayarkan
-                //     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                //         <span aria-hidden="true">&times;</span>
-                //     </button>
-                // </div>');
-            }
         } 
-
+        //load view riwayat pemesanan dari pembeli
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar_customer', $data);
         $this->load->view('pemesanan/pembayaran', $data);

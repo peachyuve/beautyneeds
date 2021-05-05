@@ -5,6 +5,7 @@ class Pembeli extends CI_Controller
 {
  public function __construct()
     {
+        //load model yang diperlukan 
         parent::__construct();
         $this->load->model('m_produk');
         $this->load->model('m_user');
@@ -15,9 +16,12 @@ class Pembeli extends CI_Controller
     public function index(){
         $data['appname'] = 'Beautyneeds';
         $data['title'] = 'Home';
+        //mengambil session dari data user login
         $sess_username = $this->session->userdata('username');
+        //mencari baris data di database tabel user sesuai session username
         $data['user'] = $this->m_user->getUserByUsername($sess_username);
 
+        //load dashboard pembeli
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar_customer', $data);
         $this->load->view('templates/slider', $data);
@@ -28,10 +32,13 @@ class Pembeli extends CI_Controller
     {
         $data['appname'] = 'BeautyNeeds';
         $data['title'] = 'Daftar Produk';
+        //mengambil session dari data user login
         $sess_username = $this->session->userdata('username');
+        //cek data user login 
         if (!$sess_username){
             $data['user'] = null;
         }else {
+            //mencari baris data di database tabel user sesuai session username
             $data['user'] = $this->m_user->getUserByUsername($sess_username);
         }
         //cek keyword di dalam kolom pencarian
@@ -44,6 +51,7 @@ class Pembeli extends CI_Controller
             $data['keyword'] = null;
         }
 
+        //mengambil semua baris data di database tabel produk dan jenis
         $data['allproduk'] = $this->m_produk->getAllProdukAndJenis();
 
         // PAGINATION
@@ -81,9 +89,10 @@ class Pembeli extends CI_Controller
         $config['attributes']       = array('class' => 'page-link text-dark');
         
         $this->pagination->initialize($config);
-        
+        //mengambil semua baris data di database tabel produk. apabila ada keyword maka pengambilan dilakukan sesuai keyword yang diinput
         $data['produkpagination'] = $this->m_produk->getProdukPembeliPagination($config['per_page'], $data['start'], $data['keyword']);
 
+        //load view produk pembeli
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar_customer', $data);
         #$this->load->view('templates/slider', $data);
@@ -91,8 +100,10 @@ class Pembeli extends CI_Controller
         $this->load->view('templates/footer', $data);
     }
 
-    public function addtocart($idProduk)
+
+    public function addtocart($idProduk)//memasukkan produk yang dipilih pembeli ke keranjang
     {
+        ////mengambil baris data di database tabel produk yang sesuai dengan id yang diinput
         $produk = $this->m_produk->getprodukById($idProduk);
 
         $data = array(
@@ -102,26 +113,33 @@ class Pembeli extends CI_Controller
             'name'    => $produk['nama']
         );
         
+        //memasukkan data produk ke keranjang
         $this->cart->insert($data);
         redirect('pembeli/produk');
     }
 
-    public function riwayatPemesanan()
+    public function riwayatPemesanan()//halaman riwayat pemesanan
     {
         $data['appname'] = 'Beautyneeds';
         $data['title'] = 'Riwayat Pemesanan';
 
+        //menghitung jumlah baris data di tabel produk
         $data['jml_produk'] = $this->m_produk->getProdukCount();
+        //menghitung jumlah baris data di tabel pemesanan 
         $data['jml_pemesanan'] = $this->m_pemesanan->getPemesananCount();
-
+        //mengambil session dari data user login
         $sess_username = $this->session->userdata('username');
+        //mencari baris data di database tabel user sesuai session username
         $data['user'] = $this->m_user->getUserByUsername($sess_username);
         $id_user = $data['user']['idUser'];
         
+        //mengambil semua baris data di database tabel produk 
         $data['getproduk'] = $this->m_produk->getAllproduk();
         
+        //mengambil semua baris data di database tabel pemesanan
         $data['allPemesanan'] = $this->m_pemesanan->getAllPemesanan();
 
+        //get all detail pemesanan dari tiap pemesanan
         $rows = count($data['allPemesanan']);
         for ($x = 0; $x < $rows; $x++)
         {
@@ -174,8 +192,10 @@ class Pembeli extends CI_Controller
         
         $this->pagination->initialize($config);
         
+        //mengambil semua baris data di database tabel pemesanan. apabila ada keyword maka pengambilan dilakukan sesuai keyword yang diinput
         $data['pemesananPagination'] = $this->m_pemesanan->getPemesananPaginationByUser($config['per_page'], $data['start'], $id_user, $data['keyword']);
-       
+
+        //get all detail pemesanan dari tiap pemesanan pagination
         $rows = count($data['pemesananPagination']);
         for ($x = 0; $x < $rows; $x++)
         {
@@ -183,6 +203,7 @@ class Pembeli extends CI_Controller
             $data['pemesananPagination'][$x]['itemPemesanan'] = $this->m_pemesanan->getDetailPemesanan($idPemesanan);
            
         }
+        //load view riwayat pemesanan
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar_customer', $data);
         $this->load->view('pembeli/riwayatPemesanan', $data);
@@ -191,23 +212,28 @@ class Pembeli extends CI_Controller
 
    
 
-    public function uploadbukti($idPembayaran,$idPemesanan){
+    public function uploadbukti($idPembayaran,$idPemesanan){//upload bukti pembayaran
+
         $data['appname'] = 'Beautyneeds';
         $data['title'] = 'Riwayat Pemesanan';
-
+        //mengambil session dari data user login
         $sess_username = $this->session->userdata('username');
+        //mencari baris data di database tabel user sesuai session username
         $data['user'] = $this->m_user->getUserByUsername($sess_username);
         $data['idPembayaran'] = $idPembayaran;
         $data['idPemesanan'] = $idPemesanan;
-
+        //form validation
         $this->form_validation->set_rules('gambar', 'Fungsi', 'trim|min_length[5]');
+        //cek form validation
         if ( $this->form_validation->run() == FALSE ){
+            //false = load ke upload bukti pembeli
             $this->load->view('templates/header', $data);
             $this->load->view('templates/navbar_customer', $data);
             $this->load->view('pembeli/uploadbukti', $data);
         }else{
             $upload_image = $_FILES['gambar']['name'];
 
+            //cek image
             if ($upload_image){
                 
                 $config['upload_path']          = './assets/img/bukti/';
@@ -219,8 +245,10 @@ class Pembeli extends CI_Controller
                 if ($this->upload->do_upload('gambar')){ //jika berhasil upload
                     //upload gambar yg baru
                     $new_image = $this->upload->data('file_name');
+                    //upload bukti pembayaran ke tabel pembayaran di database
                     $this->m_pembayaran->uploadbukti($idPembayaran,$new_image);
                     $cek = $this->m_pemesanan->sudahbayar();
+                    //ubah status menjadi sudah bayar
                     $this->m_pemesanan->ubahstatuspemesanan($idPemesanan,$cek);
                     redirect('pembeli/riwayatPemesanan');
                 }else{

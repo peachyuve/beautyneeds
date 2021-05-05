@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-#isinya buat login karyawan aja
+
 class Sales extends CI_Controller
 {
 	public function __construct()

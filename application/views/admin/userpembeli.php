@@ -7,11 +7,6 @@
 
 		<div class="mt-4 row">
             <div class="col justify-content-start">
-                <a href="<?= base_url(); ?>admin/tambahuserpembeli">
-                    <button class="btn btn-success">
-                        <i class="fas fa-fw fa-user-plus mr-2"></i>Tambah User
-                    </button>
-                </a>
             </div>
             <form action="<?= base_url('admin/userpembeli'); ?>" method="post" class="col-4 justify-content-end">
                 <div class="input-group">
@@ -53,7 +48,7 @@
 							<td><?= ++$start ?></td>
 							<td><?= $u['username'] ?></td>
 							<td><?= $u['email']?></td>
-							<td><?= $u['nama']?></td>
+							<td><?= $u['nama_user']?></td>
 
 							<td width="1">
                                 <span data-toggle="tooltip" data-placement="left" title="Detail">
@@ -108,7 +103,7 @@
                 <center>
                 <img class="rounded-circle mx-2 mb-3 mt-2 bg-light" height="100px" width="100px"
                     src="<?= base_url('assets/img/profile/') . $u['foto']; ?>">
-				<h5><?= $u['nama'];?></h5>
+				<h5><?= $u['nama_user'];?></h5>
                 </center>
                 <hr>
                 <div class="row mx-auto">

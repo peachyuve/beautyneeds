@@ -802,7 +802,7 @@ class Admin extends CI_Controller
 
     public function pemesananselesai($id){
         $data = $this->m_pemesanan->selesai($id);
-        $this->m_pemesanan->ubahstatuspemesanan($id);
+        $this->m_pemesanan->ubahstatuspemesanan($id,$data);
         redirect('admin/pemesanan');
     }
 }

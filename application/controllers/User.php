@@ -6,45 +6,51 @@ class User extends CI_Controller
 {
     public function __construct()
     {
+        //load model yang diperlukan 
         parent::__construct();
         $this->load->model('m_user');
-        $this->load->model('m_produk');
-        $this->load->model('m_user');
-        $this->load->model('m_pemesanan');
-        $this->load->model('m_pembayaran');
     }
 
 
     public function index()
     {
+        //mengecek apa ada session data yang login
         if (!$this->session->userdata('username')) {
+            //apabila tidak masuk ke login user
             redirect(base_url('user/login'));
         } 
     }
 
-    public function login()
+    public function login()//halaman login
     {
 
+        //form validasi
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
+        //apabila false load view karyawan login
         if ( $this->form_validation->run() == FALSE ){
             $data['appname'] = 'BeautyNeeds';
             $data['title'] = 'Login';
             $this->load->view('templates/navbar_customer', $data);
             $this->load->view('templates/auth_header', $data);
             $this->load->view('user/login', $data);
-        } else {
+        } else {//apabila true dilangsungkan ke login 
             $this->_login();
         }
     }
-    private function _login()
+    private function _login()//mengecek inputan user di halaman login
     {
+        //mengambil data input username
         $username = $this->input->post('username');
+        //mengambil data input password
         $password = $this->input->post('password');
+        //mencari baris data di database tabel user sesuai username yang diinput
         $user = $this->m_user->getUserByUsername($this->input->post('username', true));
 
+        //apabila ada datanya
         if ( $user ){
+            //cek role
             if ( $user['role'] == 0 ){
                 $this->session->set_flashdata('message', '<div class="alert alert-danger " role="alert">
                 Akun Anda sudah tidak aktif!</div>');
@@ -72,16 +78,18 @@ class User extends CI_Controller
                 redirect('user');
 
             }
-        } else{
+        } else{//apabila tidak ada
             $this->session->set_flashdata('message', '<div class="alert alert-danger " role="alert">
             Username belum terdaftar.</div>');
             redirect('user');
         }
     }
 
-    public function register()
+    public function register()//halaman register pembeli
     {
+        //cek sessiondata login
         if ($this->session->userdata('username')){
+            //cek role
             if ($this->session->userdata('role') == 1){
                 redirect('sales');
             } else if ($this->session->userdata('role') == 2){
@@ -91,6 +99,7 @@ class User extends CI_Controller
             }
         }
         
+        //form validasi
         $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required|trim|min_length[3]');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
             'is_unique' => 'Email ini telah terdaftar!'
@@ -107,9 +116,10 @@ class User extends CI_Controller
         $this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'required|trim');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim');
         $this->form_validation->set_rules('noHp', 'noHP', 'required|trim|min_length[10]|numeric');
-            
+        
+        //cek form validasi    
         if ( $this->form_validation->run() == FALSE ){
-            // echo "gamasuk"; die;
+            //false = load view register pembeli
             $data['appname'] = 'Beautyneeds';
             $data['title'] = 'Daftar';
             $this->load->view('templates/auth_header', $data);
@@ -132,6 +142,7 @@ class User extends CI_Controller
                 if ($this->upload->do_upload('foto')){ //jika berhasil upload
                     //upload gambar yg baru
                     $new_image = $this->upload->data('file_name');
+                    //registrasi dengan foto yang diupload
                     $this->m_auth->regdata($new_image);
 
                 } else{
@@ -141,6 +152,7 @@ class User extends CI_Controller
                     redirect('user/register');
                 }
             } else{
+                //register dengan foto default (karena tidak ada foto upload)
                 $this->m_user->regdata2();
             }
 
@@ -150,21 +162,24 @@ class User extends CI_Controller
         }
     }
 
-    public function profile()
+    public function profile()//halaman profile 
     {
         $data['appname'] = 'BeautyNeeds';
         $data['title'] = 'Profil Saya';
 
+        //mengambil session dari data user login
         $username = $this->session->userdata('username');
+        //mencari baris data di database tabel user sesuai session username
         $data['user'] = $this->m_user->getProfile($username);
 
+        //load view profile user
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar_customer', $data);
         $this->load->view('user/profile', $data);
         #$this->load->view('templates/footer', $data);
     }
 
-    public function logout()
+    public function logout()//logout 
     {
         session_destroy();
         redirect(base_url(''));

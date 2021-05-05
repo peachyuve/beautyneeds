@@ -7,11 +7,6 @@
 
         <div class="mt-4 row">
             <div class="col justify-content-start">
-                <a href="<?= base_url(); ?>admin/tambahpesanan">
-                    <button class="btn btn-success">
-                        <i class="fas fa-fw fa-plus mr-2"></i>Tambah Pemesanan
-                    </button>
-                </a>
             </div>
             <form action="<?= base_url('admin/pemesanan'); ?>" method="post" class="col-4 justify-content-end">
                 <div class="input-group">

@@ -17,25 +17,22 @@
 				</div>
 			</div>
 
-
 			<div class="form-group row">
-                <label for="password" class="col-sm-3 col-form-label">Password</label>
+                <label for="email" class="col-sm-3 col-form-label">Email</label>
                 <div class="col-sm-9">
                     <div class="form-inline">
-                        <input type="password" class="form-control col mr-1" id="password" name="password"
-                            placeholder="Ketik Password">
-                    
-                        <input type="password" class="form-control col ml-1" id="password2" name="password2"
-                            placeholder="Ulangi Password">
+                        <input type="email" class="form-control col mr-1" id="email" name="email"
+                            placeholder="Ketik Email" value="<?=  $getuser['email'] ?>">
                     </div>
-                    <?= form_error('password', '<small class="form-text text-danger">', '</small>'); ?>
+                    <?= form_error('email', '<small class="form-text text-danger">', '</small>'); ?>
                 </div>
             </div>
+
             <!-- <hr> -->
 			<div class="form-group row">
 				<label for="nama" class="col-sm-3 col-form-label">Nama Lengkap</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" id="nama" name="nama" value="<?=  $getuser['nama'] ?>">
+					<input type="text" class="form-control" id="nama" name="nama" value="<?=  $getuser['nama_user'] ?>">
 					<?= form_error('nama', '<small class="form-text text-danger">', '</small>'); ?>
 				</div>
 			</div>

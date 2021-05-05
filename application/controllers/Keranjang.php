@@ -6,20 +6,23 @@ class Keranjang extends CI_Controller
 {
 	public function __construct()
     {
+        //load model yang diperlukan 
         parent::__construct();
         $this->load->model('m_produk');
         $this->load->model('m_user');
         $this->load->model('m_pembayaran');
     }
 
-    public function index()
+    public function index()//masuk ke halaman keranjang dari pembeli
     {
         $data['appname'] = 'Beautyneeds';
         $data['title'] = 'Keranjang';
-        $data['user'] = $this->db->get_where('user',
-        ['username' => $this->session->userdata('username')])->row_array();
+        //mengambil data ke db dengan user session 
+        $data['user'] = $this->db->get_where('user', 
+        ['username' => $this->session->userdata('username')])->row_array();//mengambil session dari data user login 
 
-        $data['allproduk'] = $this->m_produk->getAllProdukAndJenis();
+        //mencari baris data di database tabel produk dan jenis 
+        $data['allproduk'] = $this->m_produk->getAllProdukAndJenis(); 
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar_customer', $data);
@@ -27,7 +30,7 @@ class Keranjang extends CI_Controller
         $this->load->view('templates/footer', $data);
     }
 
-        public function hapus()
+    public function hapus()//menghapus semua produk yang ada di keranjang pembeli
     {
         $this->cart->destroy();
         redirect('pembeli/produk');

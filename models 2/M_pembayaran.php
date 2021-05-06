@@ -2,13 +2,12 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_pembayaran extends CI_Model
-{   // mereturn semua hitungan pemesanan
+{
 	public function getPemesananCount()
     {
         return $this->db->count_all('pemesanan');
     }
 
-    //mereturn semua data pemesanan dalam array
     public function getAllPemesanan()
     {
         $this->db->select("*");
@@ -17,8 +16,7 @@ class M_pembayaran extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
-    
-    //mereturn detail pemesanan dalam array
+
     public function getDetailPemesanan($idPemesanan)
     {
         $this->db->where('idPemesanan', $idPemesanan);
@@ -27,8 +25,7 @@ class M_pembayaran extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
-    
-    //return total baris pesanan
+
     public function totalRowsPagination($keyword)
     {
         $this->cariPemesanan($keyword);
@@ -36,7 +33,6 @@ class M_pembayaran extends CI_Model
         return $this->db->count_all_results();
     }
 
-    //return pemesanan
     public function getPemesananPagination($limit, $start, $keyword = null){
         if ($keyword){
             $this->caripemesanan($keyword);
@@ -47,15 +43,12 @@ class M_pembayaran extends CI_Model
         return $query->result_array();
     }
 
-    //mereturn hasil pencarian pemesanan
     public function cariPemesanan($keyword)
     {
         $this->db->or_like('tgl_pemesanan', $keyword);
         $this->db->or_like('total', $keyword);
         $this->db->or_like('status', $keyword);
     }
-
-    //mereturn jenis pembayaran pada array
 
     public function getAllJenis()
     {
@@ -64,13 +57,11 @@ class M_pembayaran extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
-    
-    //mereturn semua kolom dari pembayaran
+
     public function findColumn(){
         $this->db->get('pembayaran')->result_array();
     }
 
-    //untuk random angka dan huruf
     public function randomGenerator($len, $isAngka=true, $isUppercase=true, $isLowecase=true)
     {
         $rand='';
@@ -92,7 +83,6 @@ class M_pembayaran extends CI_Model
         return $rand;
     }
 
-    //fungsi utama random id pada data yang baru diinput
     public function random_id(){
         $idFirstName = 'PB';
         $idList = $this->findColumn();
@@ -113,7 +103,6 @@ class M_pembayaran extends CI_Model
         return $id;
     }
 
-    //fungsi untuk menambahkan pembayaran
     public function addPembayaran(){
 
         $dataPembayaran = array(
@@ -127,7 +116,6 @@ class M_pembayaran extends CI_Model
         return $dataPembayaran['idPembayaran'];
     }
 
-    //fungsi untuk upload bukti pembayaran
     public function uploadbukti($idPembayaran,$image){
 
         $data = ['bukti' => $image];

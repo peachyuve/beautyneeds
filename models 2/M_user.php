@@ -2,48 +2,41 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_user extends CI_Model
-{ //mereturn semua data user dalam array
+{
     public function getAllUser()
     {
         return $this->db->get('user')->result_array();
     }
 
-     //mereturn jumlah data user
     public function getUserCount()
     {
         $this->db->where('status', '1');
         $this->db->from('user');
         return $this->db->count_all_results();
     }
-    //mereturn jumlah data user dengan role sales
     public function getSalesCount()
     {
         $this->db->where('role', '1');
         $this->db->from('user');
         return $this->db->count_all_results();
     }
-    //mereturn semua sales
     public function getAllSales()
     {
         $this->db->where('role', '1');
         return $this->db->get('user')->result_array();
     }
-
-    //mereturn user sesuai dengan id
     public function getUserById($idUser)
     {
         $this->db->where('idUser', $idUser);
         return $this->db->get('user')->row_array();
     }
 
-    //mereturn profile user
     public function getProfile($username)
     {
         $this->db->where('username', $username);
         return $this->db->get('user')->row_array();
     }
 
-    //mereturn total user
     public function totalRowsPagination($keyword)
     {
         $this->cariuser($keyword);
@@ -51,7 +44,6 @@ class M_user extends CI_Model
         return $this->db->count_all_results();
     }
 
-    //melakukan pencarian user
     public function cariuser($keyword)
     {
         $this->db->like('nama_user', $keyword);
@@ -63,7 +55,6 @@ class M_user extends CI_Model
         $this->db->or_like('noHp', $keyword);
     }
 
-    //mereturn user pembeli
     public function getUserPaginationPembeli($limit, $start, $keyword = null)
     {
         if ($keyword){
@@ -74,7 +65,6 @@ class M_user extends CI_Model
         return $query->result_array();
     }
 
-    //mereturn user sales
     public function getUserPaginationSales($limit, $start, $keyword = null)
     {
         if ($keyword){
@@ -85,13 +75,10 @@ class M_user extends CI_Model
         return $query->result_array();
     }
 
-    //mereturn user berdasarkan username
     public function getUserByUsername($username)
     {
         return $this->db->get_where('user', ['username' => $username])->row_array();
     }
-
-    //fungsi untuk menambahkan data pemebeli
 
     public function adddatapembeli($new_image)
     {
@@ -112,8 +99,6 @@ class M_user extends CI_Model
         ];
         $this->db->insert('user', $data);
     }
-
-    //menambahkan data sales
     public function adddatasales($new_image)
     {
         $data = [
@@ -134,7 +119,6 @@ class M_user extends CI_Model
         $this->db->insert('user', $data);
     }
 
-    //MELAKUKAN EDIT DATA OLEH ADMIN
     public function editdatafromadmin($new_image)
     {
         return $data = [
@@ -150,14 +134,12 @@ class M_user extends CI_Model
         ];
     }
 
-
-    //PENCARIAN KOLOM USER
     public function findColumn(){
         $this->db->get('user')->result_array();
     }
 
  
-    //untuk random angka dan huruf
+
     public function randomGenerator($len, $isAngka=true, $isUppercase=true, $isLowecase=true)
     {
         $rand='';
@@ -178,7 +160,6 @@ class M_user extends CI_Model
         }
         return $rand;
     }
-     //fungsi utama random id pada data yang baru diinput
 
     public function random_id(){
         $idFirstName = 'US';
@@ -201,7 +182,6 @@ class M_user extends CI_Model
 
     }
 
-    // FUNGSI UNTUK MELAKUKAN REGISTRASI USER
 
     public function regdata($new_image)
     {
@@ -222,7 +202,7 @@ class M_user extends CI_Model
 
         $this->db->insert('user', $data);
     }
-     // FUNGSI UNTUK MELAKUKAN REGISTRASI USER
+
     public function regdata2()
     {
         $data = [
@@ -242,12 +222,12 @@ class M_user extends CI_Model
 
         $this->db->insert('user', $data);
     }
-    // FUNGSI UNTUK MELAKUKAN PENGHAPUSAN USER
+
     public function hapususer()
     {
         return $data = ['status'       => 0];
     }
-    // FUNGSI UNTUK MELAKUKAN PEMBARUAN USER
+
     public function updateUser($data,$idUser)
     {
         $this->db->set($data);

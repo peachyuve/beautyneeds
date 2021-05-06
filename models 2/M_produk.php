@@ -3,7 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_produk extends CI_Model
 {
-//fungsi untuk pencarian produk
  public function cariproduk($keyword)
     {
         $this->db->like('idProduk', $keyword);
@@ -12,7 +11,6 @@ class M_produk extends CI_Model
         $this->db->or_like('harga', $keyword);
         $this->db->or_like('namaJenis', $keyword);
     }
-    //melakukan join dan mereturn total produk
     public function totalRowsPagination($keyword)
     {
         $this->cariproduk($keyword);
@@ -21,8 +19,6 @@ class M_produk extends CI_Model
         $this->db->from('produk');
         return $this->db->count_all_results();
     }
-
-    //melakukan join dan mereturn produk sesuai keyword
     public function getProdukPagination($limit, $start, $keyword = null)
     {
         if ($keyword){
@@ -34,7 +30,6 @@ class M_produk extends CI_Model
         return $query->result_array();
     }
 
-    //melakukan join dan mereturn produk sesuai keyword
     public function getProdukPembeliPagination($limit, $start, $keyword = null)
     {
         if ($keyword){
@@ -46,13 +41,10 @@ class M_produk extends CI_Model
         return $query->result_array();
     }
 
-    //mereturn semua data produk dalam array
     public function getAllProduk()
     {
         return $this->db->get('produk')->result_array();
     }
-
-    //mereturn jumlah data produk
     
     public function getProdukCount()
     {
@@ -61,7 +53,6 @@ class M_produk extends CI_Model
         return $this->db->count_all_results();
     }
 
-    //mereturn semua data produk beserta jenisnya
     public function getAllProdukAndJenis()
     {
       $this->db->select('*');
@@ -71,7 +62,6 @@ class M_produk extends CI_Model
       return $query->result_array();
     }
 
-    //mereturn semua data produk berdasarkan id
     public function getProdukById($idProduk)
     {
         $this->db->join('jenisproduk','jenisproduk.idJenisProduk=produk.idJenisProduk','LEFT OUTER');
@@ -79,7 +69,6 @@ class M_produk extends CI_Model
         return $this->db->get('produk')->row_array();
     }
 
-    //mereturn jenis produk
     public function getAllJenis()
     {
         $this->db->select('*');
@@ -88,12 +77,10 @@ class M_produk extends CI_Model
         return $query->result_array();
     }
 
-     //mereturn semua kolom dari produk
     public function findColumn(){
         $this->db->get('produk')->result_array();
     }
 
-    //untuk random angka dan huruf
     public function randomGenerator($len, $isAngka=true, $isUppercase=true, $isLowecase=true)
     {
         $rand='';
@@ -114,8 +101,6 @@ class M_produk extends CI_Model
         }
         return $rand;
     }
-
-    //fungsi utama random id pada data yang baru diinput
 
     public function random_id(){
         $idFirstName = 'UP';
@@ -138,7 +123,6 @@ class M_produk extends CI_Model
 
     }
 
-    //fungsi untuk menambahkan produk
     public function addProduk($new_image)
     {
         $data = [
@@ -157,15 +141,12 @@ class M_produk extends CI_Model
         $this->db->insert('produk', $data);
     }
 
-    //fungsi untuk memperbarui produk
     public function updateProduk($data,$idProduk)
     {
         $this->db->set($data);
         $this->db->where('idProduk', $idProduk);
         $this->db->update('produk');
     }
-
-    //fungsi untuk edit data produk
 
     public function editdataproduk($new_image)
     {
@@ -180,8 +161,6 @@ class M_produk extends CI_Model
             'stok'             => $this->input->post('stok')
         ];
     }
-
-    //fungsi untuk menghapus produk
 
     public function hapusProduk()
     {

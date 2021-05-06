@@ -1,8 +1,11 @@
+<!-- edit -->
 <div class="col pt-3 mb-4">
 	<div class="container mt-5">
 		<h2>Edit</h2>
 		<!-- MULAI KONTEN DISINI -->
+		<!-- FORM  -->
 
+		<!-- Memanggil DB produk sesuai idProduk -->
 		<?= form_open_multipart('admin/editproduk/'.$produk['idProduk']);?>
 		
         <div class="col-md-7 mt-3">
@@ -104,6 +107,7 @@
 				</div>
 			</div>
             <hr>
+            <!-- BUTTON -->
 			<div class="form-group row justify-content-end">
 				<a type="button" href="<?= base_url('admin/produk'); ?>" class="btn btn-secondary form-control mt-2 col-sm-2 mx-1">Batal</a>
 				<button type="submit" class="btn btn-success form-control mt-2 col-sm-2 mx-1">Tambah</button>
@@ -113,6 +117,7 @@
 		</form>
 	</div>
 </div>
+<!-- JSON -->
 <script>
     $('.custom-file-input').on('change', function() { 
         let fileName = $(this).val().split('\\').pop(); 

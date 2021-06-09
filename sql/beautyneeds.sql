@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2021 at 12:16 AM
+-- Generation Time: Jun 09, 2021 at 08:00 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -40,9 +40,19 @@ CREATE TABLE `detail_pemesanan` (
 
 INSERT INTO `detail_pemesanan` (`idPemesanan`, `idProduk`, `jumlah`, `subtotal`) VALUES
 ('PE002', 'P0001', 2, 80000),
-('PM2Vu', 'P0001', 1, 40000),
 ('PMTk7', 'P0004', 1, 65000),
-('PMTk7', 'P0003', 1, 65000);
+('PMTk7', 'P0003', 1, 65000),
+('PMgIG', 'P0001', 1, 40000),
+('PMIDH', 'P0002', 1, 32000),
+('PM24a', 'P0002', 1, 32000),
+('PM3or', 'P0002', 1, 32000),
+('PMy8z', 'P0001', 1, 40000),
+('PM8Ja', 'P0001', 1, 40000),
+('PM8Ja', 'P0002', 1, 32000),
+('PMo80', 'P0001', 1, 40000),
+('PMNjN', 'P0003', 1, 65000),
+('PMNjN', 'P0004', 1, 65000),
+('PMNjN', 'P0001', 1, 40000);
 
 -- --------------------------------------------------------
 
@@ -124,7 +134,10 @@ CREATE TABLE `laba` (
 --
 
 INSERT INTO `laba` (`idLaba`, `idProduk`, `idKaryawan`, `tgl_laba`, `jumlahLaba`) VALUES
-('L0001', 'P0001', 'K001', '2021-04-02', 0);
+('L1a7s', 'P0002', 'K001', '2021-06-06', 3200),
+('L7bHl', 'P0002', 'K001', '2021-06-06', 3200),
+('Lnza3', 'P0002', 'K001', '2021-06-06', 3200),
+('LTqJS', 'P0001', 'K001', '2021-06-06', 4000);
 
 -- --------------------------------------------------------
 
@@ -148,8 +161,16 @@ CREATE TABLE `pembayaran` (
 INSERT INTO `pembayaran` (`idPembayaran`, `tanggalBayar`, `idJenisBayar`, `idKaryawan`, `tanggalTenggat`, `bukti`) VALUES
 ('PB001', '2021-03-30', 'JB002', 'K001', '2021-03-31', ''),
 ('PB002', '2021-03-22', 'JB001', 'K001', '2021-03-23', ''),
+('PB1JM', '2021-06-03', 'JB001', 'K001', '0000-00-00', 'Foto_Sarah_Rahmawati_1301184271.jpg'),
+('PB5H2', '2021-06-03', 'JB001', 'K001', '0000-00-00', ''),
+('PB7d6', '2021-06-04', 'JB002', 'K001', '0000-00-00', 'S__15917063.jpg'),
+('PB8IB', '2021-06-09', 'JB001', 'K001', '0000-00-00', ''),
+('PBfHD', '2021-04-29', 'JB001', 'K001', '0000-00-00', ''),
 ('PBLVN', '2021-04-26', 'JB002', 'K001', '0000-00-00', 'S__14811178.jpg'),
-('PBnP3', '2021-04-26', 'JB001', 'K001', '0000-00-00', 'KTM_13011842712.jpg');
+('PBnP3', '2021-04-26', 'JB001', 'K001', '0000-00-00', 'KTM_13011842712.jpg'),
+('PBo00', '2021-05-05', 'JB001', 'K001', '0000-00-00', 'KTM_13011842711.jpg'),
+('PBQ7k', '2021-06-06', 'JB001', 'K001', '0000-00-00', ''),
+('PBuLP', '2021-06-09', 'JB001', 'K001', '0000-00-00', '1__submit_user_id.jpg');
 
 -- --------------------------------------------------------
 
@@ -173,8 +194,15 @@ CREATE TABLE `pemesanan` (
 
 INSERT INTO `pemesanan` (`idPemesanan`, `tgl_pemesanan`, `total`, `idUser`, `idKaryawan`, `idPembayaran`, `statuspm`) VALUES
 ('PE002', '2021-03-21', 80000, 'abcde', 'K001', 'PB002', 0),
-('PM2Vu', '2021-04-26', 40000, 'USZDB', 'K001', 'PBnP3', 2),
-('PMTk7', '2021-04-26', 130000, 'USZDB', 'K001', 'PBLVN', 2);
+('PM24a', '2021-06-03', 32000, 'USZDB', 'K001', 'PB1JM', 1),
+('PM3or', '2021-06-03', 32000, 'USZDB', 'K001', 'PB5H2', 1),
+('PM8Ja', '2021-06-06', 72000, 'USZDB', 'K001', 'PBQ7k', 1),
+('PMgIG', '2021-04-29', 40000, 'USZDB', 'K001', 'PBfHD', 0),
+('PMIDH', '2021-05-05', 32000, 'USZDB', 'K001', 'PBo00', 2),
+('PMNjN', '2021-06-09', 170000, 'USZDB', 'K001', 'PBuLP', 2),
+('PMo80', '2021-06-09', 40000, 'USZDB', 'K001', 'PB8IB', 0),
+('PMTk7', '2021-04-26', 130000, 'USZDB', 'K001', 'PBLVN', 1),
+('PMy8z', '2021-06-04', 40000, 'USZDB', 'K001', 'PB7d6', 2);
 
 -- --------------------------------------------------------
 
@@ -196,7 +224,8 @@ CREATE TABLE `pendapatansales` (
 --
 
 INSERT INTO `pendapatansales` (`idPendapatanS`, `idUser`, `idProduk`, `idKaryawan`, `jumlahPendapatan`, `statuspes`) VALUES
-('PS001', 'aaaaa', 'P0001', 'K001', 0, 0);
+('PS001', 'aaaaa', 'P0001', 'K001', 36000, 0),
+('PS002', 'abcde', 'P0002', 'K001', 30000, 1);
 
 -- --------------------------------------------------------
 
@@ -223,8 +252,8 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`idProduk`, `nama`, `warna`, `harga`, `gambar`, `deskripsi`, `status`, `stok`, `idJenisProduk`, `idKaryawan`, `idUser`) VALUES
-('P0001', 'Emina Sunscreen', 'putih', 40000, 'emina_ss.jpg', 'this is sunscreen', 1, 25, 'JP01', 'K001', 'aaaaa'),
-('P0002', 'Wardah Facial Wash', 'putih', 32000, 'wardah_facialwash.jpg', 'facial wash creamy foam', 1, 50, 'JP01', 'K001', 'abcde'),
+('P0001', 'Emina Sunscreen', 'putih', 40000, 'emina_ss.jpg', 'this is sunscreen', 1, 90, 'JP01', 'K001', 'aaaaa'),
+('P0002', 'Wardah Facial Wash', 'putih', 32000, 'wardah_facialwash.jpg', 'facial wash creamy foam', 1, 0, 'JP01', 'K001', 'abcde'),
 ('P0003', 'Scarlett Brightly Ever After Serum', 'merah', 65000, 'scarlett_serum1.jpg', 'phyto whitening, gluthatione, vit c', 1, 100, 'JP01', 'K001', 'abcde'),
 ('P0004', 'Scarlett Acne Serum', 'unguu', 65000, 'scarlett_serum2.jpg', 'tea tree water, salicylic acid, liquorice', 1, 50, 'JP01', 'K001', 'abcde'),
 ('P0005', 'Emina Bright Stuff Loose Powder', 'pinkk', 18000, 'emina_powder1.jpg', 'Emina Bright stuff loose powder adalah bedak tabur untuk memberikan tampilan wajah yang cerah, smooth dan matte. Dilengkapi dengan micro smooth particle dan gliter yang menyatu dengan kulit agar terlihat cerah, natural-glowing dan sehat. Teksturnya ringan', 1, 50, 'JP02', 'K001', 'abcde'),
@@ -233,8 +262,9 @@ INSERT INTO `produk` (`idProduk`, `nama`, `warna`, `harga`, `gambar`, `deskripsi
 ('P0008', 'Nuface Facial Mask Prominent Essence Bird Nest', 'orang', 31200, 'nuface_mask1.jpg', 'Masker wajah dengan cairan yang mengandung bahan baku terkemuka dari hewan eksotis yang telah terbuki manfaatnya bagi kecantikan kulit. Diformulasi dengan Bird Nest Extrac yang berfungsi untuk melembabkan dan mencegah penuaan dini pada kulit wajah. Juga m', 1, 20, 'JP01', 'K001', 'abcde'),
 ('P0009', 'SK-II Facial Treatment Cleansing Oil 250ml', 'putih', 701500, 'sk2_cleansingoil1.jpg', 'Facial Treatment Cleansing Oil 250ml', 1, 10, 'JP01', 'K001', 'abcde'),
 ('P0010', 'Whitelab Brightening Night Cream', 'putih', 95000, 'whitelab_acne1.jpg', 'niacinamide + collagen', 1, 5, 'JP01', 'K001', 'abcde'),
+('UPPB0', 'apa ya', 'gatau', 100000, 'default.png', 'hehe apa sih ini gajelas bet', 1, 20, 'JP01', 'K001', 'abcde'),
 ('UPPH8', 'test', 'qqqqq', 50000, 'default.png', 'asdasdsa', 0, 50, 'JP01', 'K001', 'abcde'),
-('UPZAm', 'adasd', 'asdas', 132132132, 'default.png', 'adsad', 1, 50, 'JP01', 'K001', 'abcde');
+('UPYph', 'adasdasd', 'adasd', 130000, 'default.png', 'asdasd', 0, 23, 'JP01', 'K001', 'abcde');
 
 -- --------------------------------------------------------
 
@@ -268,7 +298,8 @@ INSERT INTO `user` (`idUser`, `idKaryawan`, `nama_user`, `email`, `username`, `p
 ('abcde', 'K001', 'Sarah Rahmawati', 'ersarahr@gmail.com', 'ersarahr', '$2y$10$SuAjVvNWfUX6SYfQNkBHCeqdgul.vJb/CTLkClTsqSAkUYqlmkeRq', '082117841949', 'Jalan Helikopter no 10 RT 02 RW 23', 'Perempuan', '', '2021-03-01', 1, 'wardahpunya', 1),
 ('asdsa', 'K001', 'siapaya', 'siapaya@gmail.com', 'siapaya', '$2y$10$SuAjVvNWfUX6SYfQNkBHCeqdgul.vJb/CTLkClTsqSAkUYqlmkeRq', '089898989898', 'dimana aku', 'Perempuan', '', '2021-04-01', 1, 'akucantikbet', 1),
 ('US0g1', 'K001', 'siapaaaa', 'siapaya@gmail.com', 'siapapun', '$2y$10$nNYjtqQrNfFri7PwokMTxOPruqQiPluIoptJEyxna9tnbT8eFml62', '0898989892222', 'asdasd', 'Wanita', 'default.jpg', '2021-04-12', 1, '', 1),
-('USZDB', 'K001', 'hehehehe', 'hallo@gmail.com', 'halobandung', '$2y$10$8KjBQ5n3FHE2XsYXro62y.Vg78Cy1HHqFUTVJ02otS1QKaiSpdOki', '0811111111', 'asdasd', 'Wanita', 'default.jpg', '2021-04-21', 2, '', 1);
+('UScS3', 'K001', '', 'ferdisetyono@gmail.com', 'ferdisetyono', '$2y$10$Q.RE6m7dPit7rS145WlEieMUBufLc1tRbAC5QjvodA8K7iqzYJCSq', '088888888888', 'sadsadsa', 'Pria', 'default.jpg', '2021-05-29', 2, '', 0),
+('USZDB', 'K001', '', 'hallo@gmail.com', 'halobandung', '$2y$10$SuAjVvNWfUX6SYfQNkBHCeqdgul.vJb/CTLkClTsqSAkUYqlmkeRq', '0811111111', 'asdasd', 'Wanita', 'default.jpg', '2021-04-21', 2, '', 1);
 
 --
 -- Indexes for dumped tables

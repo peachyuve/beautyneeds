@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-#isi admin
+
 class Admin extends CI_Controller
 {
     public function __construct()
@@ -13,6 +13,8 @@ class Admin extends CI_Controller
         $this->load->model('m_user');
         $this->load->model('m_pemesanan');
         $this->load->model('m_pembayaran');
+        $this->load->model('m_laba');
+        $this->load->model('m_pendapatansales');
     }
 
     public function index()
@@ -489,6 +491,7 @@ class Admin extends CI_Controller
         </div>');
         redirect('admin/usersales');
     }
+    
     public function produk(){
 
         $data['produk'] = $this->m_produk->getAllproduk();
@@ -803,6 +806,12 @@ class Admin extends CI_Controller
     public function pemesananselesai($id){
         $data = $this->m_pemesanan->selesai($id);
         $this->m_pemesanan->ubahstatuspemesanan($id,$data);
+        $detailpemesanan = $this->m_pemesanan->getDetailPemesanan($id);
+        foreach ($detailpemesanan as $p) {
+            $this->m_laba->hitunglaba($p);
+            $pendapatansales = $this->m_pendapatansales->getPendapatanByProduk($p);
+            $this->m_pendapatansales->hitungpendapatan($pendapatansales,$p);
+        }
         redirect('admin/pemesanan');
     }
 }

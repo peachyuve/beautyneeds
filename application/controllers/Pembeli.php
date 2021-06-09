@@ -257,6 +257,7 @@ class Pembeli extends CI_Controller
                     $this->upload->display_errors() . '</small>');
 
                 }
+                // $this->m_produk->penguranganproduk($idPemesanan);
             }else{
                  $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
             Tidak Ada Gambar</div>');

@@ -11,6 +11,7 @@ class Pemesanan extends CI_Controller
         $this->load->model('m_user');
         $this->load->model('m_pemesanan');
         $this->load->model('m_pembayaran');
+        $this->load->model('m_laba');
     }
 
     public function index()
@@ -67,6 +68,24 @@ class Pemesanan extends CI_Controller
         $this->load->view('templates/navbar_customer', $data);
         $this->load->view('pemesanan/pembayaran', $data);
         $this->load->view('templates/footer', $data);
+
+    }
+
+    public function perhitunganLabaPendapatanSales(){
+
+        $data['appname'] = 'Beautyneeds';
+        $data['title'] = 'Pembayaran';
+        //mengambil session dari data user login
+        $sess_username = $this->session->userdata('username');
+        //mencari baris data di database tabel user sesuai session username
+        $data['user'] = $this->m_user->getUserByUsername($sess_username);
+        //mengambil semua baris data di database tabel jenis produk 
+        $data['getjenis'] = $this->m_pembayaran->getAllJenis();
+        //mengambil semua baris data di database tabel jenis produk dan produk
+        $data['allproduk'] = $this->m_produk->getAllprodukAndJenis();
+
+        
+
 
     }
 

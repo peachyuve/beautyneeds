@@ -46,6 +46,17 @@ class M_produk extends CI_Model
         return $query->result_array();
     }
 
+     public function getProdukPaginationSales($limit, $start,$idUser,$keyword = null)
+    {
+        if ($keyword){
+            $this->cariproduk($keyword);
+        }
+        $this->db->where('idUser', $idUser);
+        $this->db->join('jenisproduk','jenisproduk.idJenisProduk=produk.idJenisProduk','LEFT OUTER');
+        $query = $this->db->get('produk', $limit, $start);
+        return $query->result_array();
+    }
+
     //mereturn semua data produk dalam array
     public function getAllProduk()
     {
@@ -77,6 +88,13 @@ class M_produk extends CI_Model
         $this->db->join('jenisproduk','jenisproduk.idJenisProduk=produk.idJenisProduk','LEFT OUTER');
         $this->db->where('idProduk', $idProduk);
         return $this->db->get('produk')->row_array();
+    }
+
+    public function getAllProdukAndJenisSales($id)
+    {
+        $this->db->join('jenisproduk','jenisproduk.idJenisProduk=produk.idJenisProduk','LEFT OUTER');
+        $this->db->where('idUser', $id);
+        return $this->db->get('produk')->result_array();
     }
 
     //mereturn jenis produk
@@ -139,12 +157,12 @@ class M_produk extends CI_Model
     }
 
     //fungsi untuk menambahkan produk
-    public function addProduk($new_image)
+    public function addProduk($idUser, $new_image)
     {
         $data = [
             'idProduk'         => $this->random_id(),
             'idKaryawan'        => 'K001',
-            'idUser'        => 'abcde',
+            'idUser'        => $idUser,
             'idJenisProduk'    => $this->input->post('idJenisProduk'),
             'nama'             => $this->input->post('nama'),
             'warna'            => $this->input->post('warna'),
@@ -181,10 +199,26 @@ class M_produk extends CI_Model
         ];
     }
 
-    //fungsi untuk menghapus produk
+    // fungsi untuk menghapus produk
 
     public function hapusProduk()
     {
         return $data = ['status'       => 0];
     }
+
+    public function hapusprodukSales($id)
+    {
+        $this->db->where('idProduk', $id);
+        return $this->db->delete('produk');
+    }
+
+    // public function penguranganproduk($id)
+    // {
+    //     $data = [
+    //         'stok' => 'stok' - 1
+    //     ];
+    //     $this->db->set($data);
+    //     $this->db->where('idPendapatanS', $pendapatan['idPendapatanS']);
+    //     $this->db->update('pendapatansales');
+    // }
 }

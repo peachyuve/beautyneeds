@@ -2,156 +2,8 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_user extends CI_Model
-{ //mereturn semua data user dalam array
-    public function getAllUser()
-    {
-        return $this->db->get('user')->result_array();
-    }
-
-     //mereturn jumlah data user
-    public function getUserCount()
-    {
-        $this->db->where('status', '1');
-        $this->db->from('user');
-        return $this->db->count_all_results();
-    }
-    //mereturn jumlah data user dengan role sales
-    public function getSalesCount()
-    {
-        $this->db->where('role', '1');
-        $this->db->from('user');
-        return $this->db->count_all_results();
-    }
-    //mereturn semua sales
-    public function getAllSales()
-    {
-        $this->db->where('role', '1');
-        return $this->db->get('user')->result_array();
-    }
-
-    //mereturn user sesuai dengan id
-    public function getUserById($idUser)
-    {
-        $this->db->where('idUser', $idUser);
-        return $this->db->get('user')->row_array();
-    }
-
-    //mereturn profile user
-    public function getProfile($username)
-    {
-        $this->db->where('username', $username);
-        return $this->db->get('user')->row_array();
-    }
-
-    //mereturn total user
-    public function totalRowsPagination($keyword)
-    {
-        $this->cariuser($keyword);
-        $this->db->from('user');
-        return $this->db->count_all_results();
-    }
-
-    //melakukan pencarian user
-    public function cariuser($keyword)
-    {
-        $this->db->like('nama_user', $keyword);
-        $this->db->or_like('email', $keyword);
-        $this->db->or_like('username', $keyword);
-        $this->db->or_like('jenisKelamin', $keyword);
-        $this->db->or_like('tgl_lahir', $keyword);
-        $this->db->or_like('alamat', $keyword);
-        $this->db->or_like('noHp', $keyword);
-    }
-
-    //mereturn user pembeli
-    public function getUserPaginationPembeli($limit, $start, $keyword = null)
-    {
-        if ($keyword){
-            $this->cariuser($keyword);
-        }
-        $this->db->where('role', 2);
-        $query = $this->db->get('user', $limit, $start);
-        return $query->result_array();
-    }
-
-    //mereturn user sales
-    public function getUserPaginationSales($limit, $start, $keyword = null)
-    {
-        if ($keyword){
-            $this->cariuser($keyword);
-        }
-        $this->db->where('role', 1);
-        $query = $this->db->get('user', $limit, $start);
-        return $query->result_array();
-    }
-
-    //mereturn user berdasarkan username
-    public function getUserByUsername($username)
-    {
-        return $this->db->get_where('user', ['username' => $username])->row_array();
-    }
-
-    //fungsi untuk menambahkan data pemebeli
-
-    public function adddatapembeli($new_image)
-    {
-        $data = [
-            'idUser'        => $this->random_id(),
-            'nama_user'          => htmlspecialchars($this->input->post('nama_user', true)),
-            'idKaryawan'    => 'K001',
-            'email'         => htmlspecialchars($this->input->post('email', true)),
-            'username'      => htmlspecialchars($this->input->post('username', true)),
-            'password'      => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-            'jenisKelamin' => $this->input->post('jenisKelamin'),
-            'tgl_lahir'     => $this->input->post('tgl_lahir'),
-            'alamat'        => $this->input->post('alamat'),
-            'noHp'       => $this->input->post('noHp'),
-            'foto'          => $new_image,
-            'role'          =>2,
-            'status'        =>1
-        ];
-        $this->db->insert('user', $data);
-    }
-
-    //menambahkan data sales
-    public function adddatasales($new_image)
-    {
-        $data = [
-            'idUser'        => $this->random_id(),
-            'idKaryawan'    => 'K001',
-            'nama_user'          => htmlspecialchars($this->input->post('nama_user', true)),
-            'email'         => htmlspecialchars($this->input->post('email', true)),
-            'username'      => htmlspecialchars($this->input->post('username', true)),
-            'password'      => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-            'jenisKelamin' => $this->input->post('jenisKelamin'),
-            'tgl_lahir'     => $this->input->post('tgl_lahir'),
-            'alamat'        => $this->input->post('alamat'),
-            'noHp'       => $this->input->post('noHp'),
-            'foto'          => $new_image,
-            'role'          =>1,
-            'status'        =>1
-        ];
-        $this->db->insert('user', $data);
-    }
-
-    //MELAKUKAN EDIT DATA OLEH ADMIN
-    public function editdatafromadmin($new_image)
-    {
-        return $data = [
-            'nama_user'          => htmlspecialchars($this->input->post('nama_user', true)),
-            'email'         => htmlspecialchars($this->input->post('email', true)),
-            'username'      => htmlspecialchars($this->input->post('username', true)),
-            'password'      => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-            'jenisKelamin' => $this->input->post('jenisKelamin'),
-            'tgl_lahir'     => $this->input->post('tgl_lahir'),
-            'alamat'        => $this->input->post('alamat'),
-            'noHp'       => $this->input->post('noHp'),
-            'foto'          => $new_image,
-        ];
-    }
-
-
-    //PENCARIAN KOLOM USER
+{ 
+        //PENCARIAN KOLOM USER
     public function findColumn(){
         $this->db->get('user')->result_array();
     }
@@ -242,6 +94,159 @@ class M_user extends CI_Model
 
         $this->db->insert('user', $data);
     }
+
+    //mereturn user berdasarkan username
+    public function getUserByUsername($username)
+    {
+        return $this->db->get_where('user', ['username' => $username])->row_array();
+    }
+    
+    //mereturn profile user
+    public function getProfile($username)
+    {
+        $this->db->where('username', $username);
+        return $this->db->get('user')->row_array();
+    }
+    //mereturn semua data user dalam array
+    public function getAllUser()
+    {
+        return $this->db->get('user')->result_array();
+    }
+
+     //mereturn jumlah data user
+    public function getUserCount()
+    {
+        $this->db->where('status', '1');
+        $this->db->from('user');
+        return $this->db->count_all_results();
+    }
+    //mereturn jumlah data user dengan role sales
+    public function getSalesCount()
+    {
+        $this->db->where('role', '1');
+        $this->db->from('user');
+        return $this->db->count_all_results();
+    }
+    //mereturn semua sales
+    public function getAllSales()
+    {
+        $this->db->where('role', '1');
+        return $this->db->get('user')->result_array();
+    }
+
+    //mereturn user sesuai dengan id
+    public function getUserById($idUser)
+    {
+        $this->db->where('idUser', $idUser);
+        return $this->db->get('user')->row_array();
+    }
+
+
+    //mereturn total user
+    public function totalRowsPagination($keyword)
+    {
+        $this->cariuser($keyword);
+        $this->db->from('user');
+        return $this->db->count_all_results();
+    }
+
+    //melakukan pencarian user
+    public function cariuser($keyword)
+    {
+        $this->db->like('nama_user', $keyword);
+        $this->db->or_like('email', $keyword);
+        $this->db->or_like('username', $keyword);
+        $this->db->or_like('jenisKelamin', $keyword);
+        $this->db->or_like('tgl_lahir', $keyword);
+        $this->db->or_like('alamat', $keyword);
+        $this->db->or_like('noHp', $keyword);
+    }
+
+    //mereturn user pembeli
+    public function getUserPaginationPembeli($limit, $start, $keyword = null)
+    {
+        if ($keyword){
+            $this->cariuser($keyword);
+        }
+        $this->db->where('role', 2);
+        $query = $this->db->get('user', $limit, $start);
+        return $query->result_array();
+    }
+
+    //mereturn user sales
+    public function getUserPaginationSales($limit, $start, $keyword = null)
+    {
+        if ($keyword){
+            $this->cariuser($keyword);
+        }
+        $this->db->where('role', 1);
+        $query = $this->db->get('user', $limit, $start);
+        return $query->result_array();
+    }
+
+
+
+    //fungsi untuk menambahkan data pemebeli
+
+    public function adddatapembeli($new_image)
+    {
+        $data = [
+            'idUser'        => $this->random_id(),
+            'nama_user'          => htmlspecialchars($this->input->post('nama_user', true)),
+            'idKaryawan'    => 'K001',
+            'email'         => htmlspecialchars($this->input->post('email', true)),
+            'username'      => htmlspecialchars($this->input->post('username', true)),
+            'password'      => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+            'jenisKelamin' => $this->input->post('jenisKelamin'),
+            'tgl_lahir'     => $this->input->post('tgl_lahir'),
+            'alamat'        => $this->input->post('alamat'),
+            'noHp'       => $this->input->post('noHp'),
+            'foto'          => $new_image,
+            'role'          =>2,
+            'status'        =>1
+        ];
+        $this->db->insert('user', $data);
+    }
+
+    //menambahkan data sales
+    public function adddatasales($new_image)
+    {
+        $data = [
+            'idUser'        => $this->random_id(),
+            'idKaryawan'    => 'K001',
+            'nama_user'          => htmlspecialchars($this->input->post('nama_user', true)),
+            'email'         => htmlspecialchars($this->input->post('email', true)),
+            'username'      => htmlspecialchars($this->input->post('username', true)),
+            'password'      => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+            'jenisKelamin' => $this->input->post('jenisKelamin'),
+            'tgl_lahir'     => $this->input->post('tgl_lahir'),
+            'alamat'        => $this->input->post('alamat'),
+            'noHp'       => $this->input->post('noHp'),
+            'foto'          => $new_image,
+            'role'          =>1,
+            'status'        =>1
+        ];
+        $this->db->insert('user', $data);
+    }
+
+    //MELAKUKAN EDIT DATA OLEH ADMIN
+    public function editdatafromadmin($new_image)
+    {
+        return $data = [
+            'nama_user'          => htmlspecialchars($this->input->post('nama_user', true)),
+            'email'         => htmlspecialchars($this->input->post('email', true)),
+            'username'      => htmlspecialchars($this->input->post('username', true)),
+            'password'      => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+            'jenisKelamin' => $this->input->post('jenisKelamin'),
+            'tgl_lahir'     => $this->input->post('tgl_lahir'),
+            'alamat'        => $this->input->post('alamat'),
+            'noHp'       => $this->input->post('noHp'),
+            'foto'          => $new_image,
+        ];
+    }
+
+
+
     // FUNGSI UNTUK MELAKUKAN PENGHAPUSAN USER
     public function hapususer()
     {

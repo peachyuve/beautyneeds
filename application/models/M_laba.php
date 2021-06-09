@@ -19,7 +19,6 @@ class M_laba extends CI_Model
     	return $query->result_array();
     }
 
-
     #mencari baris pada database dengan kata kunci nama sales, dan nama user
     public function carilaba($keyword)
     {
@@ -28,14 +27,26 @@ class M_laba extends CI_Model
    	}
     // mengambil semua baris data dari laba yang di join dengan produk dan user. apabila ada keyword, 
     // hanya mengambil baris data dengan kata kunci keyword. 
-    public function getLabaPagination($limit, $start, $keyword = null)
+    public function getLabaPagination($limit, $start, $keyword = null, $keyword1 = null, $keyword2 = null)
     {
         if ($keyword){
             $this->carilaba($keyword);
+        }elseif($keyword1){
+            $this->db->where('tgl_laba >=', $keyword1);
+            $this->db->where('tgl_laba <=', $keyword2);
         }
         $this->db->join('produk','produk.idProduk=laba.idProduk','LEFT OUTER');
         $this->db->join('user','user.idUser=produk.idUser','LEFT OUTER');
         $query = $this->db->get('laba', $limit, $start);
+        return $query->result_array();
+    }
+    public function getLabaDatePagination($limit, $start, $keyword1, $keyword2)
+    {
+        $this->db->where('tgl_laba >=', $keyword1);
+        $this->db->where('tgl_laba <=', $keyword2);
+        $this->db->join('produk','produk.idProduk=laba.idProduk','LEFT OUTER');
+        $this->db->join('user','user.idUser=produk.idUser','LEFT OUTER');
+        $query = $this->db->get('laba',  $start);
         return $query->result_array();
     }
 
@@ -107,6 +118,19 @@ class M_laba extends CI_Model
         ];
 
         $this->db->insert('laba', $data);
+    }
+
+    public function hitunglaba($pemesanan)
+    {
+        $data = [
+            'idLaba' => $this->random_id(),
+            'idKaryawan' =>'K001',
+            'idProduk' => $pemesanan['idProduk'],
+            'jumlahLaba' => $pemesanan['subtotal']*(10/100),
+            'tgl_laba' => date('Y-m-d')
+        ];
+        $this->db->insert('laba', $data);
+
     }
 
 

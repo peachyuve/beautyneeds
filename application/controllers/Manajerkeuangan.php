@@ -223,4 +223,99 @@ class Manajerkeuangan extends CI_Controller
         redirect('manajerkeuangan/pendapatansales');
     }
 
+    public function rekaplaba()//halaman tambah laba 
+    {
+        $data['appname'] = 'BeautyNeeds';
+        $data['title'] = 'Rekap Laba';
+        //mengambil session dari data user login
+        $sess_username = $this->session->userdata('username');
+        //mencari baris data di database tabel karyawan sesuai session username
+        $data['user'] = $this->m_karyawan->getKaryawanByUsername($sess_username);
+
+        //mengambil semua baris data di database tabel laba 
+        $data['getlaba'] = $this->m_laba->getAllLaba();
+        //form validation
+        $this->form_validation->set_rules('tgl_awal', 'tgl_awal', 'required|trim');
+        $this->form_validation->set_rules('tgl_akhir', 'tgl_akhir', 'required|trim');
+
+        //cek form validasi
+        if ( $this->form_validation->run() == FALSE ){
+            //false = load view tambah laba
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar_manajerkeuangan', $data);
+            $this->load->view('manajerkeuangan/rekaplaba', $data);
+
+        }else{
+            //cek keyword di dalam kolom pencarian
+            $data['tgl_awal'] = $this->input->post('tgl_awal');
+            $data['tgl_akhir'] = $this->input->post('tgl_akhir');
+
+            //PAGINATION 
+            $config['base_url']     = 'http://localhost/beautyneeds/manajerkeuangan/rekaplaba';
+            $config['per_page']     = 5;
+            $data['start']          = $this->uri->segment(3);
+
+            //STYLING PAGINATION
+            $config['full_tag_open']    = '<nav><ul class="pagination pagination-sm justify-content-center">';
+            $config['full_tag_close']   = '</ul></nav>';
+            
+            $config['first_link']       = 'First';
+            $config['first_tag_open']   = '<li class="page-item">';
+            $config['first_tag_close']  = '</li>';
+            
+            $config['last_link']        = 'Last';
+            $config['last_tag_open']    = '<li class="page-item">';
+            $config['last_tag_close']   = '</li>';
+            
+            $config['next_link']        = '&raquo';
+            $config['next_tag_open']    = '<li class="page-item">';
+            $config['next_tag_close']   = '</li>';
+            
+            $config['prev_link']        = '&laquo';
+            $config['prev_tag_open']    = '<li class="page-item">';
+            $config['prev_tag_close']   = '</li>';
+            
+            $config['cur_tag_open']     = '<li class="page-item"><a class="page-link bg-secondary text-light" href="#">';
+            $config['cur_tag_close']    = '</a></li>';
+            
+            $config['num_tag_open']     = '<li class="page-item">';
+            $config['num_tag_close']    = '</li>';
+
+            $config['attributes']       = array('class' => 'page-link text-dark');
+            
+            $this->pagination->initialize($config);
+            //mengambil semua baris data di database tabel laba. apabila ada keyword maka pengambilan dilakukan sesuai keyword yang diinput
+            $data['labapagination'] = $this->m_laba->getLabaPagination($config['per_page'], $data['start'],null, $data['tgl_awal'],$data['tgl_akhir']);
+            
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar_manajerkeuangan', $data);
+            $this->load->view('manajerkeuangan/rekaplaba', $data);
+
+
+        }
+    }
+    public function rekaplaba2($tgl_awal,$tgl_akhir){
+        $data['appname'] = 'BeautyNeeds';
+        $data['title'] = 'Rekap Laba';
+        //mengambil session dari data user login
+        $sess_username = $this->session->userdata('username');
+        //mencari baris data di database tabel karyawan sesuai session username
+        $data['user'] = $this->m_karyawan->getKaryawanByUsername($sess_username);
+
+        //mengambil semua baris data di database tabel laba 
+        $data['getlaba'] = $this->m_laba->getAllLaba();
+        //form validation
+       
+        //cek keyword di dalam kolom pencarian
+        $data['tgl_awal'] = $tgl_awal;
+        $data['tgl_akhir'] = $tgl_akhir;
+
+        //mengambil semua baris data di database tabel laba. apabila ada keyword maka pengambilan dilakukan sesuai keyword yang diinput
+        $data['labapagination'] = $this->m_laba->getLabaPagination(null,null,null, $data['tgl_awal'],$data['tgl_akhir']);
+        $this->load->view('manajerkeuangan/rekaplaba2', $data);
+
+
+        
+    }
+
 }

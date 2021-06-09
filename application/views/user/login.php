@@ -1,3 +1,4 @@
+<!-- KONTEN -->
 	<div class="container h-100">
 		<div class="row h-100 justify-content-center align-items-center">
 			<div class="col-10 col-md-8 col-lg-5">
@@ -9,6 +10,7 @@
 						
 						<?= $this->session->flashdata('message'); ?>
 
+						<!-- FORM -->
 						<form action="login" method="post">
 							<div class="form-group">
 								<label for="Username">Username</label>
@@ -20,6 +22,7 @@
 								<input type="password" class="form-control" id="password" name="password">
 								<?= form_error('password', '<small class="form-text text-danger">', '</small>'); ?>
 							</div>
+							<!-- BUTTON LOGIN -->
 							<div class="form-group">
 								<button type="submit" class="btn btn-success form-control mt-2">Login</button>
 							</div>
@@ -31,5 +34,8 @@
 		</div>
 	</div>
 </body>
+
+
+<!-- AKHIR KONTEN -->
 
 </html>

@@ -7,9 +7,14 @@
 
 		<div class="mt-4 row">
             <div class="col justify-content-start">
-                <a href="<?= base_url(); ?>manajerkeuangan/tambahlaba">
+                <a href="<?= base_url(); ?>manajerkeuangan/rekaplaba">
                     <button class="btn btn-success">
                         <i class="fas fa-fw fa-plus mr-2"></i>Rekap Laba
+                    </button>
+                </a>
+                <a href="<?= base_url(); ?>manajerkeuangan/tambahlaba">
+                    <button class="btn btn-success">
+                        <i class="fas fa-fw fa-plus mr-2"></i>Tambah Laba
                     </button>
                 </a>
             </div>
@@ -79,3 +84,49 @@
 </div>
 
 <!-- MODAL FORM DETAIL laba -->
+<div class="modal fade" id="daterekaplaba" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Tanggal</h4>
+            </div>
+            <div class="modal-body my-auto">
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary">
+                            <i class="fas fa-calendar-alt"></i>
+                        </button>
+                    </div>
+                    <input type="text" method="post" name="datefilter" autocomplete="off" autofocus
+                    value="<?= set_value('date'); ?>">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="<?= base_url(); ?>manajerkeuangan/rekaplaba">
+                    <button class="btn btn-success">Search</button>
+                </a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+$(function() {
+  $('input[name="datefilter"]').daterangepicker({
+      autoUpdateInput: false,
+      locale: {
+          cancelLabel: 'Clear'
+      }
+  });
+  $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+  });
+
+  $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+  });
+});
+</script>

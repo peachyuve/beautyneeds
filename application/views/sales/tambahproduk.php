@@ -3,7 +3,7 @@
 		<h2>Tambah</h2>
 		<!-- MULAI KONTEN DISINI -->
 
-		<?= form_open_multipart('admin/tambahproduk');?>
+		<?= form_open_multipart('sales/tambahproduk');?>
 		
         <div class="col-md-7 mt-3">
 
@@ -96,7 +96,7 @@
 			</div>
             <hr>
 			<div class="form-group row justify-content-end">
-				<a type="button" href="<?= base_url('admin/produk'); ?>" class="btn btn-secondary form-control mt-2 col-sm-2 mx-1">Batal</a>
+				<a type="button" href="<?= base_url('sales/produk'); ?>" class="btn btn-secondary form-control mt-2 col-sm-2 mx-1">Batal</a>
 				<button type="submit" class="btn btn-success form-control mt-2 col-sm-2 mx-1">Tambah</button>
 			</div>
 		</div>

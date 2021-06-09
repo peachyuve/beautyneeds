@@ -10,6 +10,8 @@ class Produk extends CI_Controller
         $this->load->model('m_produk');
     }
 
+    
+
 
 
 

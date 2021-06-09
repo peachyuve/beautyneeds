@@ -1,3 +1,4 @@
+<!-- KONTEN -->
 <div class="container h-100 pt-5">
 	<div class="row h-100 justify-content-center align-items-center pt-3">
 		<div class="col-10 col-md-8 col-lg-7">
@@ -6,6 +7,8 @@
 					<div class="text-center">
 						<h1 class="h4 text-gray-900 mb-4">Daftar</h1>
 					</div>
+
+					<!-- FORM -->
 
 					<?= form_open_multipart('user/register');?>
 
@@ -105,6 +108,7 @@
 						</div>
 					</div>
 					<hr>
+					<!-- BUTTON SUBMIT -->
 					<div class="form-group">
 						<button type="submit" class="btn btn-success form-control mt-2">Submit</button>
 					</div>
@@ -120,6 +124,7 @@
 </div>
 </body>
 
+<!-- Javascript untuk gambar -->
 <script>
 	$('.custom-file-input').on('change', function () {
 		let fileName = $(this).val().split('\\').pop();

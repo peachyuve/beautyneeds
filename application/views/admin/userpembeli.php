@@ -28,7 +28,7 @@
 						<th scope="col"></th>
 						<th scope="col">Username</th>
 						<th scope="col">Email</th>
-						<th scope="col">Nama</th>
+						<!--<th scope="col">Nama</th>-->
 						<th scope="col" colspan="3">Action</th>
 					</tr>
 				</thead>

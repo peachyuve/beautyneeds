@@ -27,6 +27,9 @@ class Admin extends CI_Controller
             $data['title'] = 'Dashboard';
 
             $data['jml_produk'] = $this->m_produk->getProdukCount();
+            $data['jml_pemesanan'] = $this->m_pemesanan->getPemesananCount();
+            $data['jml_userSales'] = $this->m_user->getSalesCount();
+            $data['jml_userPembeli'] = $this->m_user->getPembeliCount();
             
             $sess_username = $this->session->userdata('username');
             $data['nama'] = $this->m_karyawan->getKaryawanByUsername($sess_username);
@@ -352,6 +355,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('jenisKelamin', 'Jenis Kelamin', 'required|trim');
         $this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'required|trim');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim');
+        $this->form_validation->set_rules('kode', 'kode', 'required|trim');
         $this->form_validation->set_rules('noHp', 'Nomor Telepon', 'required|trim|min_length[10]|numeric');
             
         if ( $this->form_validation->run() == FALSE ){
@@ -813,5 +817,6 @@ class Admin extends CI_Controller
             $this->m_pendapatansales->hitungpendapatan($pendapatansales,$p);
         }
         redirect('admin/pemesanan');
+
     }
 }

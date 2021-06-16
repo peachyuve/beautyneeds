@@ -127,6 +127,12 @@ class M_user extends CI_Model
         $this->db->from('user');
         return $this->db->count_all_results();
     }
+    public function getPembeliCount()
+    {
+        $this->db->where('role', '2');
+        $this->db->from('user');
+        return $this->db->count_all_results();
+    }
     //mereturn semua sales
     public function getAllSales()
     {
@@ -192,7 +198,7 @@ class M_user extends CI_Model
     {
         $data = [
             'idUser'        => $this->random_id(),
-            'nama_user'          => htmlspecialchars($this->input->post('nama_user', true)),
+            'nama_user'          => htmlspecialchars($this->input->post('nama', true)),
             'idKaryawan'    => 'K001',
             'email'         => htmlspecialchars($this->input->post('email', true)),
             'username'      => htmlspecialchars($this->input->post('username', true)),
@@ -214,7 +220,7 @@ class M_user extends CI_Model
         $data = [
             'idUser'        => $this->random_id(),
             'idKaryawan'    => 'K001',
-            'nama_user'          => htmlspecialchars($this->input->post('nama_user', true)),
+            'nama_user'          => htmlspecialchars($this->input->post('nama', true)),
             'email'         => htmlspecialchars($this->input->post('email', true)),
             'username'      => htmlspecialchars($this->input->post('username', true)),
             'password'      => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
@@ -223,6 +229,7 @@ class M_user extends CI_Model
             'alamat'        => $this->input->post('alamat'),
             'noHp'       => $this->input->post('noHp'),
             'foto'          => $new_image,
+            'uniqueCode'          =>$this->input->post('kode'),
             'role'          =>1,
             'status'        =>1
         ];
@@ -233,7 +240,7 @@ class M_user extends CI_Model
     public function editdatafromadmin($new_image)
     {
         return $data = [
-            'nama_user'          => htmlspecialchars($this->input->post('nama_user', true)),
+            'nama_user'          => htmlspecialchars($this->input->post('nama', true)),
             'email'         => htmlspecialchars($this->input->post('email', true)),
             'username'      => htmlspecialchars($this->input->post('username', true)),
             'password'      => password_hash($this->input->post('password'), PASSWORD_DEFAULT),

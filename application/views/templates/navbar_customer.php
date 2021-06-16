@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow-sm">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light shadow-sm" style="background-color: #FFE5DE;">
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".collapse">
 		<span class="navbar-toggler-icon"></span>
@@ -24,13 +24,6 @@
 				<a class="nav-link" href="<?= base_url('pembeli/produk'); ?>">Produk</a>
 			</li>
 
-			<?php if ($title == 'Kontak Kami') :?>
-				<li class="nav-item active">
-			<?php else : ?>
-				<li class="nav-item">
-			<?php endif; ?>
-				<a class="nav-link" href="<?= base_url('pembeli/kontak'); ?>">Kontak</a>
-			</li>
 			
 			<?php if ($this->session->has_userdata('username')) : ?>
 				<?php if ($title == 'Riwayat Pemesanan') :?>
@@ -49,7 +42,7 @@
 			<?php if ( $this->session->userdata('username') ) : ?>
 				<li class="nav-item active mr-4">
 				<a class="nav-link align-self-center" href="<?= base_url('keranjang'); ?>">
-					<button type="button" class="btn btn-outline-dark">
+					<button type="button" class="btn btn-outline-secondarys">
 						<i class="fas fa-shopping-cart fa-lg mr-2"></i>
 						<span class="badge badge-danger"><?= $this->cart->total_items();?></span>
 					</button>

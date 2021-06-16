@@ -1,5 +1,5 @@
 <div class="wrapper">
-	<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background: #2f3542;">
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background: #B47169;">
 
 		<a class="navbar-brand" href="#"><i ></i><?= $appname; ?></a>
 		<button type="button" id="sidebarCollapse" class="btn text-white">
@@ -10,7 +10,7 @@
 			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 				<li class="nav-item dropdown active">
 					<a class="nav-link dropdown-toggle" href="" id="" role="button" data-toggle="dropdown"
-						style="background: #2f3542;">
+						style="background: #FFE5DE;">
 						<!--<?= $nama['nama']; ?></span>-->
 
 					</a>
@@ -24,7 +24,7 @@
 
 	</nav>
 	<!-- Sidebar  -->
-	<nav id="sidebar">
+	<nav id="sidebar" style="background-color: #B47169;">
 		<!-- <div class="sidebar-header">
                 <h3>Bootstrap Sidebar</h3>
             </div> -->

@@ -31,8 +31,7 @@
                 <div class="col-sm-9">
                     <div class="form-inline">
                         <input type="password" class="form-control col mr-1" id="password" name="password"
-                            placeholder="Ketik Password">
-                    
+                            placeholder="Ketik Password"> <br> <br>
                         <input type="password" class="form-control col ml-1" id="password2" name="password2"
                             placeholder="Ulangi Password">
                     </div>
@@ -43,7 +42,7 @@
 			<div class="form-group row">
 				<label for="nama" class="col-sm-3 col-form-label">Nama Lengkap</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" id="nama" name="nama" value="<?=  $getuser['nama'] ?>">
+					<input type="text" class="form-control" id="nama" name="nama_user" value="<?=  $getuser['nama_user'] ?>">
 					<?= form_error('nama', '<small class="form-text text-danger">', '</small>'); ?>
 				</div>
 			</div>

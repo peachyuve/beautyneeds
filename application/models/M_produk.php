@@ -71,6 +71,13 @@ class M_produk extends CI_Model
         $this->db->from('produk');
         return $this->db->count_all_results();
     }
+    public function getProdukCountSales($id)
+    {
+        $this->db->where('idUser', $id);
+        $this->db->where('status', '1');
+        $this->db->from('produk');
+        return $this->db->count_all_results();
+    }
 
     //mereturn semua data produk beserta jenisnya
     public function getAllProdukAndJenis()
@@ -212,13 +219,21 @@ class M_produk extends CI_Model
         return $this->db->delete('produk');
     }
 
-    // public function penguranganproduk($id)
-    // {
-    //     $data = [
-    //         'stok' => 'stok' - 1
-    //     ];
-    //     $this->db->set($data);
-    //     $this->db->where('idPendapatanS', $pendapatan['idPendapatanS']);
-    //     $this->db->update('pendapatansales');
-    // }
+    public function kurangiproduk($detail)
+    {
+        foreach ($detail as $d){
+            $this->penguranganproduk($d['idProduk']);
+        }
+    }
+
+    public function penguranganproduk($id)
+    {
+        $produk = $this->getProdukById($id);
+        $data = [
+            'stok' => $produk['stok'] - 1
+        ];
+        $this->db->set($data);
+        $this->db->where('idProduk', $id);
+        $this->db->update('produk');
+    }
 }

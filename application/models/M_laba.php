@@ -130,7 +130,6 @@ class M_laba extends CI_Model
             'tgl_laba' => date('Y-m-d')
         ];
         $this->db->insert('laba', $data);
-
     }
 
 

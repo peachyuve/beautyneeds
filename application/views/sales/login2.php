@@ -5,21 +5,16 @@
 				<div class="card o-hidden border-0 shadow-lg" >
 					<div class="card-body">
 						<div class="text-center">
-							<h1 class="h4 text-gray-900 mb-4">Login</h1>
+							<h1 class="h4 text-gray-900 mb-4">Unique Code</h1>
 						</div>
 						
 						<?= $this->session->flashdata('message'); ?>
 
 						<form action="login" method="post">
 							<div class="form-group">
-								<label for="Username">Username</label>
-								<input type="text" class="form-control" id="username" name="username" value="<?= set_value('username'); ?>">
-								<?= form_error('username', '<small class="form-text text-danger">', '</small>'); ?>
-							</div>
-							<div class="form-group">
-								<label for="Password">Password</label>
-								<input type="password" class="form-control" id="password" name="password">
-								<?= form_error('password', '<small class="form-text text-danger">', '</small>'); ?>
+								<label for="uniqueCode">Unique Code</label>
+								<input type="text" class="form-control" id="uniqueCode" name="uniqueCode" value="<?= set_value('uniqueCode'); ?>">
+								<?= form_error('uniqueCode', '<small class="form-text text-danger">', '</small>'); ?>
 							</div>
 							<div class="form-group">
 								<button type="submit" class="btn form-control mt-2" style="background-color: #B47169;">Login</button>

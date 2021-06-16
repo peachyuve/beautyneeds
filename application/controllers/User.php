@@ -85,6 +85,7 @@ class User extends CI_Controller
         }
     }
 
+
     public function register()//halaman register pembeli
     {
         //cek sessiondata login

@@ -13,7 +13,7 @@
                     <input type="text" class="form-control" placeholder="Cari Pemesanan.." name="keyword" autocomplete="off" autofocus
                     value="<?= set_value('keyword'); ?>">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" name="submit">
+                        <button class="btn btn-outline-secondary" style="background-color: #FFE5DE" type="submit" name="submit">
                             <i class="fas fa-fw fa-search"></i></button>
                     </div>
                 </div>

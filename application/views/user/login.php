@@ -24,7 +24,7 @@
 							</div>
 							<!-- BUTTON LOGIN -->
 							<div class="form-group">
-								<button type="submit" class="btn btn-success form-control mt-2">Login</button>
+								<button type="submit" class="btn form-control mt-2" style="background-color: #B47169;">Login</button>
 							</div>
 							<hr>
 						</form>

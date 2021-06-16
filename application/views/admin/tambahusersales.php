@@ -92,6 +92,15 @@
 			</div>
 
 			<div class="form-group row">
+				<label for="kode" class="col-sm-3 col-form-label">Kode</label>
+				<div class="col-sm-9">
+					<input type="kode" class="form-control" id="kode" name="kode"
+                    value="<?= set_value('kode'); ?>">
+					<?= form_error('kode', '<small class="form-text text-danger">', '</small>'); ?>
+				</div>
+			</div>
+
+			<div class="form-group row">
 				<label for="foto" class="col-sm-3 col-form-label">Foto Diri</label>
 				<div class="col-sm-9">
 					<div class="custom-file">

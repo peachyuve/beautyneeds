@@ -250,6 +250,8 @@ class Pembeli extends CI_Controller
                     $cek = $this->m_pemesanan->sudahbayar();
                     //ubah status menjadi sudah bayar
                     $this->m_pemesanan->ubahstatuspemesanan($idPemesanan,$cek);
+                    $detailpemesanan = $this->m_pemesanan->getDetailPemesanan($idPemesanan);
+                    $this->m_produk->kurangiproduk($detailpemesanan);
                     redirect('pembeli/riwayatPemesanan');
                 }else{
                     //menampilkan pesan error khusus upload

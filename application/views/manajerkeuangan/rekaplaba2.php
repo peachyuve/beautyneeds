@@ -36,7 +36,7 @@
             <?= $this->pagination->create_links(); ?>
           </div>
           <?php
-                $filename = "Data Laba " . $tgl_awal . $tgl_akhir . ".xlsx";
+                $filename = "Data Laba " . $tgl_awal . $tgl_akhir . ".xls";
                 header("Content-Disposition: attachment; filename=\"$filename\"");
                 header("Content-Type: application/vnd.ms-excel");
           ?>

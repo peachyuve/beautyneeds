@@ -1,5 +1,5 @@
 <div class="wrapper">
-	<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background: #2f3542;">
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background: #B47169;">
 
 		<a class="navbar-brand" href="#"><i ></i><?= $appname; ?></a>
 		<button type="button" id="sidebarCollapse" class="btn text-white">
@@ -36,14 +36,15 @@
 
 	</nav>
 	<!-- Sidebar  -->
-	<nav id="sidebar">
+	<nav id="sidebar" style="background-color: #B47169">
 		<!-- <div class="sidebar-header">
                 <h3>Bootstrap Sidebar</h3>
             </div> -->
 
 		<ul class="list-unstyled components mt-5">
 			<div class="mt-4 my-3 ml-3">
-				<h6>Admin</h6>
+				<h4>Admin</h4>
+				<br>
 			</div>
 
 			<?php if ($title == 'Dashboard') :?>

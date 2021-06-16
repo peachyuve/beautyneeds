@@ -1,9 +1,7 @@
-
-
-<div class="container-fluid pt-3 mt-4 mb-5">
+<div class="container-fluid pt-3 mt-4 mb-5" >
     <!-- MULAI KONTEN DISINI -->
     <br></br>
-    <a  href="<?= base_url('pembeli/produk'); ?>">Daftar Produk</a>
+    <!--<a  href="<?= base_url('pembeli/produk'); ?>">Daftar Produk</a>-->
 
 
     <div class="row col-11 mb-4 mx-auto justify-content-start">
@@ -13,7 +11,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Cari Produk.." name="keyword" autocomplete="off" autofocus
                     value="<?= set_value('keyword'); ?>">
-                    <div class="input-group-append">
+                    <div class="input-group-append" style="background-color: #FFE5DE">
                         <button class="btn btn-outline-secondary" type="submit" name="submit">
                             <i class="fas fa-fw fa-search"></i></button>
                     </div>
@@ -33,7 +31,7 @@
             </div>
             <div class="card-footer bg-white">
                 <?php if (is_null($user)) :?>
-                    <a href="<?= base_url('user'); ?>" class="btn btn-info mr-1 w-100"><i class="fas fa-lg fa-cart-plus ml-n1 mr-1"></i>Pesan Sekarang</a>
+                    <a href="<?= base_url('user'); ?>" class="btn btn-outline-secondary mr-1 w-100"><i class="fas fa-lg fa-cart-plus ml-n1 mr-1"></i>Pesan Sekarang</a>
                 <?php else : ?>
                     <?php if ($produk['stok'] > 0) :?>
                         <a href="<?= base_url('pembeli/addtocart/').$produk['idProduk'] ?>" class="btn btn-info mr-1 w-100"><i class="fas fa-lg fa-cart-plus ml-n1 mr-1"></i> Tambah ke Keranjang</a>

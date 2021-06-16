@@ -13,8 +13,8 @@ class M_pemesanan extends CI_Model
 	public function getPemesananCount()
     {
         
-        $this->db->where('statuspm', 1);
         return $this->db->count_all('pemesanan');
+
     }
     //mereturn semua data pemesanan dalam array
     public function getAllPemesanan()

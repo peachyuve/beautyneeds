@@ -64,7 +64,7 @@
                             <td><?= $o['deskripsi']?></td> -->
                             <td><?= $o['stok']?></td>
                             <td>
-                                <?php if ($o['status'] == 1) : ?>
+                                <?php if ($o['stok'] > 0) : ?>
                                     Tersedia
                                 <?php else : ?>
                                     Tidak Tersedia

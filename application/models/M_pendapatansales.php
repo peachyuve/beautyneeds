@@ -85,8 +85,21 @@ class M_pendapatansales extends CI_Model
         $this->db->set($data);
         $this->db->where('idPendapatanS', $pendapatan['idPendapatanS']);
         $this->db->update('pendapatansales');
+        return $data['jumlahPendapatan'];
 
 
+    }
+
+    public function getjumlahpendapatan($id)
+    {
+        $this->db->where('idUser', $id);
+        return $this->db->get('pendapatansales')->row_array();
+    }
+
+    public function hitungpendapatancount($id)
+    {
+        $pendapatan = $this->getjumlahpendapatan($id);
+        return $pendapatan['jumlahPendapatan'];
     }
 
 }

@@ -22,7 +22,7 @@ a:focus {
 
 .navbar {
     /* padding: 15px 10px; */
-    background: #fff;
+    background: #FFE5DD;
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
@@ -41,6 +41,25 @@ a:focus {
     border-bottom: 1px dashed #ddd;
     margin: 40px 0;
 }
+
+.card {
+    background-color: #EEA59C;
+}
+
+/* ---------------------------------------------------
+    FOOTER STYLE
+----------------------------------------------------- */
+
+#footer {
+    min-height: 100vh;
+    /* background-image: linear-gradient(#000, #282828); */
+    padding: 0 12%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -120,6 +139,9 @@ ul ul a {
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
+.btn-custom {
+    background-color: #FFE5DE;
+}
 
 #content {
     width: calc(100% - 250px);

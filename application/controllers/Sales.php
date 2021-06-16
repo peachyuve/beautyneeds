@@ -19,11 +19,13 @@ class Sales extends CI_Controller
         $data['appname'] = 'BeautyNeeds';
         $data['title'] = 'Dashboard';
 
-        $data['jml_produk'] = $this->m_produk->getProdukCount();
-        
-      	$sess_username = $this->session->userdata('username');
-    	$data['user'] = $this->m_user->getUserByUsername($sess_username);
+        $sess_username = $this->session->userdata('username');
+        $data['user'] = $this->m_user->getUserByUsername($sess_username);
 
+        $data['jml_produk'] = $this->m_produk->getProdukCountSales($data['user']['idUser']);
+        $data['jml_pendapatanS'] = $this->m_pendapatansales->hitungpendapatancount($data['user']['idUser']);
+        
+      	// print_r($data['jml_pendapatanS']);
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_sales', $data);
         $this->load->view('sales/index', $data);

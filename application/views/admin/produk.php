@@ -15,8 +15,7 @@
             </div>
             <form action="<?= base_url('admin/produk'); ?>" method="post" class="col-4 justify-content-end">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Cari.." name="keyword" autocomplete="off" autofocus
-                    value="<?= set_value('keyword'); ?>">
+                    <input type="text" class="form-control" placeholder="Cari.." style="background-color: #FFE5DE;" name="keyword" autocomplete="off" autofocus value="<?= set_value('keyword'); ?>">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit" name="submit">
                             <i class="fas fa-fw fa-search"></i></button>
@@ -64,7 +63,7 @@
                             <td><?= $o['deskripsi']?></td> -->
                             <td><?= $o['stok']?></td>
                             <td>
-                                <?php if ($o['status'] == 1) : ?>
+                                <?php if ($o['stok'] > 0) : ?>
                                     Tersedia
                                 <?php else : ?>
                                     Tidak Tersedia
@@ -196,7 +195,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="button" class="btn" style="background-color: #B47169;" data-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>

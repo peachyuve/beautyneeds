@@ -5,7 +5,7 @@
 
 		<div class="row mt-4 justify-content-center">
 			
-            <div class="card" style="width: 45em;">
+            <div class="card" style="width: 45em; background-color: #BFA6A2;">
                 <div class="row">
                     <div class="col-3">    
                         <img class="rounded-circle mx-2 bg-light my-5 mx-4" style="object-fit: cover;" height="150em" width="150em"

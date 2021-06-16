@@ -7,7 +7,7 @@
 
 	<div class="container mt-4">
 		<div class="row justify-content-between">	
-			<div class="card text-white bg-info mb-3 shadow-lg" style="max-width: 21rem; border: none;">
+			<div class="card text-white mb-3 shadow-lg" style="max-width: 21rem; border: none; background-color: #EEA59C;">
 				<!-- <div class="card-header">Header</div> -->
 				<div class="card-body">
 					<div class="row">
@@ -21,7 +21,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="card text-white bg-info mb-3 shadow-lg" style="max-width: 21rem; border: none;">
+			<div class="card text-white mb-3 shadow-lg" style="max-width: 21rem; border: none; background-color: #EEA59C;">
 				<!-- <div class="card-header">Header</div> -->
 				<div class="card-body">
 					<div class="row">
@@ -35,7 +35,49 @@
 					</div>
 				</div>
 			</div>
-			<div class="card text-white bg-info mb-3 shadow-lg" style="max-width: 21rem; border: none;">
+			<div class="card text-white mb-3 shadow-lg" style="max-width: 21rem; border: none; background-color: #EEA59C;">
+				<!-- <div class="card-header">Header</div> -->
+				<div class="card-body">
+					<div class="row">
+						<div class="col-4 my-auto">
+							<i class="fas fa-fw fa-handshake fa-4x"></i>
+						</div>
+						<div class="col">
+							<h5 class="card-title">Cash On Delivery</h5>
+							<p class="card-text">Pembayaran dapat dilakukan lebih mudah dengan Cash On Delivery</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card text-white mb-3 shadow-lg" style="max-width: 21rem; border: none; background-color: #EEA59C;">
+				<!-- <div class="card-header">Header</div> -->
+				<div class="card-body">
+					<div class="row">
+						<div class="col-4 my-auto">
+							<i class="fas fa-fw fa-handshake fa-4x"></i>
+						</div>
+						<div class="col">
+							<h5 class="card-title">Cash On Delivery</h5>
+							<p class="card-text">Pembayaran dapat dilakukan lebih mudah dengan Cash On Delivery</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card text-white mb-3 shadow-lg" style="max-width: 21rem; border: none; background-color: #EEA59C;">
+				<!-- <div class="card-header">Header</div> -->
+				<div class="card-body">
+					<div class="row">
+						<div class="col-4 my-auto">
+							<i class="fas fa-fw fa-handshake fa-4x"></i>
+						</div>
+						<div class="col">
+							<h5 class="card-title">Cash On Delivery</h5>
+							<p class="card-text">Pembayaran dapat dilakukan lebih mudah dengan Cash On Delivery</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card text-white mb-3 shadow-lg" style="max-width: 21rem; border: none; background-color: #EEA59C;">
 				<!-- <div class="card-header">Header</div> -->
 				<div class="card-body">
 					<div class="row">
@@ -50,6 +92,12 @@
 				</div>
 			</div>
 		</div>
+		<div class="container">
+			<h2 class="sectionheader_heading heading u-h1" style="text-align: center;">
+				COLLECTIONS 
+			</h2>
+        </div>
+      
 	</div>
 
 	<!-- AKHIR KONTEN -->

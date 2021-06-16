@@ -10,7 +10,7 @@
             <thead>
                 <tr>
                     <th scope="col"></th>
-                    <th scope="col">Nama Obat</th>
+                    <th scope="col">Nama Produk</th>
                     <th scope="col">Jumlah</th>
                     <th scope="col">Harga</th>
                     <th scope="col">Subtotal</th>
@@ -19,7 +19,7 @@
             <tbody>
                 <?php if (!$this->cart->contents()):?>
                     <tr><td colspan="5">
-                    <div class="alert alert-danger text-center" role="alert">
+                    <div class="alert text-center" role="alert" style="background-color: #B47169;">
                         Keranjang belum terisi.
                     </div></td></tr>
                 <?php else: ?>
@@ -52,7 +52,7 @@
             </div>
             <?php endif; ?>
             <div class=""><a href="<?= base_url('pembeli/produk'); ?>">
-                <button type="button" class="btn btn-info">
+                <button type="button" class="btn" style="background-color: #FFE5DE;">
                     <i class="fas fa-shopping-cart mr-2"></i>Lanjutkan Belanja
                 </button></a>
             </div>
